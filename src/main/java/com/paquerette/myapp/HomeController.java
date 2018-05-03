@@ -1,5 +1,7 @@
 package com.paquerette.myapp;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,6 +34,18 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		Connection c = null;
+	      try {
+	         Class.forName("org.postgresql.Driver");
+	         c = DriverManager
+	            .getConnection("jdbc:postgresql://127.0.0.1:5432/IsepParcours",
+	            "postgres", "Isep");
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         System.err.println(e.getClass().getName()+": "+e.getMessage());
+	         System.exit(0);
+	      }
+	      System.out.println("Opened database successfully");
 		
 		return "home";
 	}
