@@ -9,7 +9,7 @@ public class connection {
          Class.forName("org.postgresql.Driver");
          c = DriverManager
             .getConnection("jdbc:postgresql://localhost:5432/IsepParcours",
-            "postgres", "123");
+            "isep", "paquerette");
       } catch (Exception e) {
          e.printStackTrace();
          System.err.println(e.getClass().getName()+": "+e.getMessage());

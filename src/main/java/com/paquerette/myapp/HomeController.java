@@ -39,7 +39,7 @@ public class HomeController {
 	         Class.forName("org.postgresql.Driver");
 	         c = DriverManager
 	            .getConnection("jdbc:postgresql://127.0.0.1:5432/IsepParcours",
-	            "postgres", "Isep");
+	            "isep", "paquerette");
 	      } catch (Exception e) {
 	         e.printStackTrace();
 	         System.err.println(e.getClass().getName()+": "+e.getMessage());
