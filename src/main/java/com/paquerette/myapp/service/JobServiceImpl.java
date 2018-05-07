@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.paquerette.myapp.dao.JobDAO;
 import com.paquerette.myapp.model.Job;
+import com.paquerette.myapp.model.Parcours;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -47,6 +48,12 @@ public class JobServiceImpl implements JobService {
     @Transactional
     public void removeJob(int id) {
         this.JobDAO.removeJob(id);
+    }
+    
+    @Override
+    @Transactional
+    public List<Parcours> findParcoursByJobId(int id) {
+    	return this.JobDAO.findParcoursByJobId(id);
     }
 
 }

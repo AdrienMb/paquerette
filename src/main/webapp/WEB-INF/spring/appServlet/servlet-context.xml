@@ -41,6 +41,7 @@
         <beans:property name="annotatedClasses">
             <beans:list>
                 <beans:value>com.paquerette.myapp.model.Job</beans:value>
+                <beans:value>com.paquerette.myapp.model.Parcours</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -57,6 +58,13 @@
     </beans:bean>
     <beans:bean id="jobService" class="com.paquerette.myapp.service.JobServiceImpl">
         <beans:property name="jobDAO" ref="jobDAO"></beans:property>
+    </beans:bean>
+    
+    <beans:bean id="parcoursDAO" class="com.paquerette.myapp.dao.ParcoursDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="parcoursService" class="com.paquerette.myapp.service.ParcoursServiceImpl">
+        <beans:property name="parcoursDAO" ref="parcoursDAO"></beans:property>
     </beans:bean>
     <context:component-scan base-package="com.paquerette.myapp" />
 

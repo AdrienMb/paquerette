@@ -1,5 +1,7 @@
 package com.paquerette.myapp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paquerette.myapp.model.Job;
+import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.service.JobService;
 
 @Controller
@@ -48,7 +52,6 @@ public class JobController {
 
     @RequestMapping("/remove/{id}")
     public String removeJob(@PathVariable("id") int id) {
-
         this.jobService.removeJob(id);
         return "redirect:/jobs";
     }
@@ -58,6 +61,12 @@ public class JobController {
         model.addAttribute("job", this.jobService.getJobById(id));
         model.addAttribute("listJobs", this.jobService.listJobs());
         return "job";
+    }
+    
+    @RequestMapping(value = "/job/findParcoursByJobId", method = RequestMethod.POST)
+    public String findParcoursByJobId(@ModelAttribute("job") Job j, Model model) {
+    	model.addAttribute("listParcours", this.jobService.findParcoursByJobId(j.getId()));
+        return "parcours";
     }
 
 }

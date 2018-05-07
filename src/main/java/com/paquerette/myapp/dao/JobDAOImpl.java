@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.mapping.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.paquerette.myapp.model.Job;
+import com.paquerette.myapp.model.Parcours;
 
 @Repository("jobDAO")
 public class JobDAOImpl implements JobDAO {
@@ -62,6 +64,17 @@ public class JobDAOImpl implements JobDAO {
             session.delete(p);
         }
         logger.info("Job deleted successfully, Job details=" + p);
+    }
+    
+    @Override
+    public List<Parcours> findParcoursByJobId(int id) {
+    	Session session = this.sessionFactory.getCurrentSession();
+        Job j = (Job) session.load(Job.class, new Integer(id));
+        List<Parcours> ParcourssList = j.getParcours();
+        for (Parcours p : ParcourssList) {
+            logger.info("Parcours List::" + p);
+        }
+        return ParcourssList;
     }
 
 }
