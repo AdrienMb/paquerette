@@ -42,6 +42,7 @@
             <beans:list>
                 <beans:value>com.paquerette.myapp.model.Job</beans:value>
                 <beans:value>com.paquerette.myapp.model.Parcours</beans:value>
+                <beans:value>com.paquerette.myapp.model.Domaine</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -56,16 +57,25 @@
     <beans:bean id="jobDAO" class="com.paquerette.myapp.dao.JobDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="jobService" class="com.paquerette.myapp.service.JobServiceImpl">
-        <beans:property name="jobDAO" ref="jobDAO"></beans:property>
-    </beans:bean>
-    
     <beans:bean id="parcoursDAO" class="com.paquerette.myapp.dao.ParcoursDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </beans:bean>
+    <beans:bean id="domaineDAO" class="com.paquerette.myapp.dao.DomaineDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </beans:bean>
+    
+    
+    <beans:bean id="jobService" class="com.paquerette.myapp.service.JobServiceImpl">
+        <beans:property name="jobDAO" ref="jobDAO"></beans:property>
     </beans:bean>
     <beans:bean id="parcoursService" class="com.paquerette.myapp.service.ParcoursServiceImpl">
         <beans:property name="parcoursDAO" ref="parcoursDAO"></beans:property>
     </beans:bean>
+    <beans:bean id="domaineService" class="com.paquerette.myapp.service.DomaineServiceImpl">
+        <beans:property name="domaineDAO" ref="domaineDAO"></beans:property>
+    </beans:bean>
+    
+    
     <context:component-scan base-package="com.paquerette.myapp" />
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

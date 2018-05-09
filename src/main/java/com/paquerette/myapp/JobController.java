@@ -12,24 +12,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.paquerette.myapp.model.Domaine;
 import com.paquerette.myapp.model.Job;
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.service.JobService;
+import com.paquerette.myapp.service.DomaineService;
 
 @Controller
 public class JobController {
 
     private JobService jobService;
+    private DomaineService domaineService;
 
     @Autowired(required = true)
     @Qualifier(value = "jobService")
     public void setJobService(JobService ps) {
         this.jobService = ps;
     }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "domaineService")
+    public void setDomaineService(DomaineService ds) {
+        this.domaineService = ds;
+    }
 
     @RequestMapping(value = "/jobs", method = RequestMethod.GET)
     public String listJobs(Model model) {
         model.addAttribute("job", new Job());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
         model.addAttribute("listJobs", this.jobService.listJobs());
         return "job";
     }

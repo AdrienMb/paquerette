@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.paquerette.myapp.model.Domaine;
 import com.paquerette.myapp.model.Job;
 import com.paquerette.myapp.model.Parcours;
 
@@ -43,7 +44,7 @@ public class JobDAOImpl implements JobDAO {
         Session session = this.sessionFactory.getCurrentSession();
         List<Job> JobsList = session.createQuery("from Job").list();
         for (Job p : JobsList) {
-            logger.info("Job List::" + p);
+            logger.info("Job List::" + p + "job's domaines: " + p.getDomaines());
         }
         return JobsList;
     }

@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Entity bean with JPA annotations Hibernate provides JPA implementation
@@ -38,6 +39,14 @@ public class Job {
         inverseJoinColumns = { @JoinColumn(name = "parcours_id") }
     )
     List<Parcours> parcours = new ArrayList<Parcours>();
+    
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+        name = "Job_Domaine", 
+        joinColumns = { @JoinColumn(name = "job_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "domaine_id") }
+    )
+    private List<Domaine> domaines = new ArrayList<Domaine>();
 
     public int getId() {
         return id;
@@ -61,6 +70,14 @@ public class Job {
 
 	public void setParcours(List<Parcours> parcours) {
 		this.parcours = parcours;
+	}
+
+	public List<Domaine> getDomaines() {
+		return domaines;
+	}
+
+	public void setDomaines(List<Domaine> domaines) {
+		this.domaines = domaines;
 	}
 
 	@Override
