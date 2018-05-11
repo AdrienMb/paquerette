@@ -37,18 +37,16 @@ INSERT INTO domaine (domaine_name) VALUES ('Electronique');
 INSERT INTO domaine (domaine_name) VALUES ('Informatique');
 INSERT INTO domaine (domaine_name) VALUES ('Commercial');
 
-INSERT INTO parcours (parcours_name) VALUES ('Ingénieur logiciel');
-INSERT INTO parcours (parcours_name) VALUES ('Ingénieur numérique et santé');
-
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('4', '1');
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('4', '2');
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('5', '1');
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('6', '2');
-
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('6', '1');
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('4', '2');
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('5', '2');
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('6', '3');
-
 INSERT INTO parcours (parcours_name, parcours_link_isep) VALUES ('Ingénieur logiciel', 'https://www.isep.fr/cycle-ingenieur/parcours-ingenieur-logiciel/');
 INSERT INTO parcours (parcours_name, parcours_link_isep) VALUES ('Ingénieur numérique et santé', 'https://www.isep.fr/cycle-ingenieur/parcours-ingenieur-numerique-et-sante/');
+
+INSERT INTO job_parcours (job_id, parcours_id) VALUES ('1', '1');
+INSERT INTO job_parcours (job_id, parcours_id) VALUES ('1', '2');
+INSERT INTO job_parcours (job_id, parcours_id) VALUES ('2', '1');
+INSERT INTO job_parcours (job_id, parcours_id) VALUES ('3', '2');
+
+INSERT INTO job_domaine (job_id, domaine_id) VALUES ('3', '1');
+INSERT INTO job_domaine (job_id, domaine_id) VALUES ('1', '2');
+INSERT INTO job_domaine (job_id, domaine_id) VALUES ('2', '2');
+INSERT INTO job_domaine (job_id, domaine_id) VALUES ('3', '3');
+
