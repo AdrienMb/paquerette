@@ -33,6 +33,9 @@ public class Parcours {
     
     @ManyToMany(mappedBy = "parcours")
     private List<Job> jobs = new ArrayList<Job>();
+    
+    @ManyToMany(mappedBy = "parcoursModule")
+    private List<Module> modules = new ArrayList<Module>();
 
     public int getId() {
 		return id;
@@ -64,6 +67,13 @@ public class Parcours {
 
 	public void setJobs(ArrayList<Job> jobs) {
 		this.jobs = jobs;
+	}
+	public List<Module> getModules() {
+		return modules;
+	}
+
+	public void setModules(ArrayList<Module> modules) {
+		this.modules = modules;
 	}
 
 	@Override
