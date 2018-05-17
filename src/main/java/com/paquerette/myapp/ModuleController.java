@@ -70,6 +70,7 @@ public class ModuleController {
     
     @RequestMapping(value = "/module/findParcoursByModuleId", method = RequestMethod.POST)
     public String findParcoursByModuleId(@ModelAttribute("module") Module m, Model model) {
+    	System.out.println(m);
     	model.addAttribute("listParcours", this.ModuleService.findParcoursByModuleId(m.getId()));
         return "parcours";
     }

@@ -62,9 +62,6 @@ public class Module {
 		return parcoursModule;
 	}
 
-	public void setJobs(ArrayList<Job> jobs) {
-		this.parcoursModule = parcoursModule;
-	}
 
 	@Override
     public String toString() {
