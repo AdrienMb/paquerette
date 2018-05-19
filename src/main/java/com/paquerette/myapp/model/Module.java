@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Entity bean with JPA annotations Hibernate provides JPA implementation
@@ -33,6 +34,9 @@ public class Module {
     
     @Column(name = "module_description")
     private String desc;
+
+    @Transient
+    private ArrayList<Integer> modulesId = new ArrayList<Integer>();
     
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -67,5 +71,13 @@ public class Module {
     public String toString() {
         return "Module [id=" + id + ", name=" + name +", desc=" + desc+ "]";
     }
+
+	public List<Integer> getModulesId() {
+		return modulesId;
+	}
+
+	public void setModulesId(ArrayList<Integer> modules) {
+		this.modulesId = modules;
+	}
 
 }
