@@ -79,17 +79,18 @@ public class ModuleController {
     
     @RequestMapping(value = "/module/findParcoursByModuleId", method = RequestMethod.POST)
     public String findParcoursByModuleId(@RequestParam("modulesId") List<Integer> m, Model model) {
-    	System.out.println(m);
-    	ArrayList<Parcours> parcours=new ArrayList<Parcours>();
+    	List<Parcours> parcours=new ArrayList<Parcours>();
     	for(Integer mod : m) {
-    		System.out.println(this.ModuleService.findParcoursByModuleId(mod));
-    		parcours.addAll(this.ModuleService.findParcoursByModuleId(mod));
+    		if(!parcours.contains(this.ModuleService.findParcoursByModuleId(mod)))
+    			parcours.addAll(this.ModuleService.findParcoursByModuleId(mod));
     	}
-    	Set<Parcours> hs = new HashSet<Parcours>();
-    	hs.addAll(parcours);
-    	for(Parcours parcUnique : hs) {
-        	System.out.println(Collections.frequency(parcours, hs));
-    	}
+    	/*List<Parcours> pNoDupli = new ArrayList<Parcours>(new HashSet<Parcours>(parcours));
+    	for(Parcours parcUnique : pNoDupli) {
+        	System.out.println(parcUnique);
+        	System.out.println(pNoDupli.size());
+        	System.out.println(parcours.size());
+        	System.out.println(Collections.frequency(parcours, parcUnique));
+    	}*/
 		model.addAttribute("listParcours", parcours);
         return "parcours";
     }
