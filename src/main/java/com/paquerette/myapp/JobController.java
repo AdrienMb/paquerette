@@ -81,6 +81,7 @@ public class JobController {
     public String findParcoursByJobId(@RequestParam("jobsId") List<Integer> j, Model model) {
         List<Job> jobss=new ArrayList<Job>();
 		Map<Parcours,Integer> hm = new HashMap<Parcours,Integer>();
+		int nbReq=j.size();
 		for(Integer job : j) {
 			for(Parcours parcoursi : this.jobService.findParcoursByJobId(job)) {
 				if(!hm.containsKey(parcoursi))
@@ -91,6 +92,11 @@ public class JobController {
 					hm.put(parcoursi,nb);
 				}
 			}
+		}
+		for(Parcours p : hm.keySet()) {
+			int nb = hm.get(p);
+			nb=(int)(nb*100/nbReq);
+			hm.put(p,nb);
 		}
 		model.addAttribute("listParcours", hm);
 		return "parcours";

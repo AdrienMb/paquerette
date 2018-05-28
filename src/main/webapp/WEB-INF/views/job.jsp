@@ -25,7 +25,7 @@
 			method="POST" modelAttribute="job">
 			<c:if test="${!empty listDomaines}">
 				<c:forEach items="${listDomaines}" var="domaine">
-					<input type="checkbox" class="domaine" value="${domaine.id}">${domaine.name}<br>
+					<input type="checkbox" class="domaine" id="-${domaine.id}" value="${domaine.id}"><label for="-${domaine.id}">${domaine.name}</label><br>
 				</c:forEach>
 			</c:if>
 			<br>
@@ -35,13 +35,14 @@
 					<script type="text/javascript">job_domaines.get('${job.id}').push(parseInt('${domaine.id}'));</script>
 				</c:forEach>
 				<form:checkbox value="${job.id}" id="${job.id}" class="job" path="jobsId" /><form:label for="${job.id}" class="${job.id}" path="jobsId">${job.name}</form:label><br>
-			</c:forEach>
+			</c:forEach><br>
 			<input type="submit" value="Chercher mon parcours" />
 		</form:form>
 	</c:if>
 	</div>
 	</div>
 	</div>
+	<%@include  file="footer.html" %>
 </body>
 </html>
 

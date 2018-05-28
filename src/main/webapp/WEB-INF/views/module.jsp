@@ -26,7 +26,7 @@
 		<form:form id="moduleForm" action="/module/findParcoursByModuleId"
 			method="POST" modelAttribute="module">
 			<c:forEach items="${listModules}" var="module">
-				<form:checkbox value="${module.id}" path="modulesId" />${module.name}<br>
+				<label><form:checkbox value="${module.id}" path="modulesId" />${module.name}</label><br>
 			</c:forEach>
 			<br>
 			<input type="submit" value="Chercher mon parcours" />
@@ -35,6 +35,7 @@
 	</div>
 	</div>
 	</div>
+	<%@include  file="footer.html" %>
 </body>
 </html>
 

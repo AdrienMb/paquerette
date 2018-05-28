@@ -83,6 +83,7 @@ public class ModuleController {
 	public String findParcoursByModuleId(@RequestParam("modulesId") List<Integer> m, Model model) {
 		List<Parcours> parcours=new ArrayList<Parcours>();
 		Map<Parcours,Integer> hm = new HashMap<Parcours,Integer>();
+		int nbReq = m.size();
 		for(Integer mod : m) {
 			for(Parcours parcoursi : this.ModuleService.findParcoursByModuleId(mod)) {
 				if(!hm.containsKey(parcoursi))
@@ -93,6 +94,11 @@ public class ModuleController {
 					hm.put(parcoursi,nb);
 				}
 			}
+		}
+		for(Parcours p : hm.keySet()) {
+			int nb = hm.get(p);
+			nb=(int)(nb*100/nbReq);
+			hm.put(p,nb);
 		}
 		model.addAttribute("listParcours", hm);
 		return "parcours";

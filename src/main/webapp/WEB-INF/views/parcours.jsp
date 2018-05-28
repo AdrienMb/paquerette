@@ -11,9 +11,16 @@
 </head>
 <body>
 
-<h3>Parcours List</h3>
+
+<div class="container">
+ <h3>Parcours liés à votre recherche</h3><br>
+ 
 <c:forEach items="${listParcours}" var="parcours">
-        <a href="${parcours.key.link}">${parcours.key.name}</a> ${parcours.value}<br>
+<div class="col-md-4 parcours">
+        <a href="${parcours.key.link}">${parcours.key.name}</a> <br>Correspondance : ${parcours.value}%<br>
+        </div>
 </c:forEach>
+</div>
+<%@include  file="footer.html" %>
 </body>
 </html>
