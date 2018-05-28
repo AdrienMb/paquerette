@@ -11,7 +11,15 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-
+<div class="container">
+<div class="row">
+ <div class="col-md-3">
+ <h3>Choisissez votre parcours par module</h3><br>
+ <p>Selectionnez des modules qui vous intéressent.</p>
+ </div>
+  <div class="col-md-1">
+ </div>
+  <div class="col-md-8">
 	<h3>Modules List</h3>
 	<script type="text/javascript"> var module_domaines = new Map(); </script>
 	<c:if test="${!empty listModules}">
@@ -24,6 +32,9 @@
 			<input type="submit" value="Chercher mon parcours" />
 		</form:form>
 	</c:if>
+	</div>
+	</div>
+	</div>
 </body>
 </html>
 
