@@ -32,6 +32,9 @@ public class Job {
     @Column(name = "job_name")
     private String name;
     
+    @Transient
+    private ArrayList<Integer> jobsId = new ArrayList<Integer>();
+    
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
         name = "Job_Parcours", 
@@ -106,5 +109,9 @@ public class Job {
             return false;
         return true;
     }
+    
+    public List<Integer> getJobsId() {
+		return jobsId;
+	}
 
 }
