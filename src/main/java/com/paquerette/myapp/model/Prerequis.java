@@ -10,48 +10,39 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;	
-import javax.persistence.JoinColumn;
+import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 /**
  * Entity bean with JPA annotations Hibernate provides JPA implementation
  */
 @Entity
-@Table(name = "Module")
-public class Module {
+@Table(name = "Prerequis")
+public class Prerequis {
 
     @Id
-    @Column(name = "module_id")
+    @Column(name = "Prerequis_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "module_name")
+    @Column(name = "Prerequis_name")
     private String name;
     
-    @Column(name = "module_description")
-    private String desc;
-    
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "Module_Parcours", 
-        joinColumns = { @JoinColumn(name = "module_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "parcours_id") }
-    )
-    List<Parcours> parcoursModule = new ArrayList<Parcours>();
-
-
     @OneToMany(
-            mappedBy = "module", 
+            mappedBy = "prerequis", 
             cascade = CascadeType.ALL, 
             orphanRemoval = true
         )
-    List<Module_Prerequis> prerequis = new ArrayList<Module_Prerequis>();
+    private List<Module_Prerequis> modules = new ArrayList<Module_Prerequis>();
 
-    public int getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -67,10 +58,12 @@ public class Module {
 		this.name = name;
 	}
 
+	public List<Module_Prerequis> getModules() {
+		return modules;
+	}
 
-	@Override
-    public String toString() {
-        return "Module [id=" + id + ", name=" + name +", desc=" + desc+ "]";
-    }
-
+	public void setModules(List<Module_Prerequis> modules) {
+		this.modules = modules;
+	}
+    
 }

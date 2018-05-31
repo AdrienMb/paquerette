@@ -18,6 +18,7 @@
 ${message}<br/>
 <a href="${pageContext.request.contextPath}/jobs">Choisir mon parcours via les métiers</a><br/>
 <a href="${pageContext.request.contextPath}/modules">Choisir mon parcours via les modules</a><br/>
+<a href="${pageContext.request.contextPath}/prerequis">Choisir mon parcours via les prerequis</a><br/>
 </p>
 </body>
 </html>
