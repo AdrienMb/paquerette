@@ -47,35 +47,6 @@ public class JobController {
         model.addAttribute("listJobs", this.jobService.listJobs());
         return "job";
     }
-
-    // For add and update Job both
-    @RequestMapping(value = "/job/add", method = RequestMethod.POST)
-    public String addJob(@ModelAttribute("job") Job p) {
-
-        if (p.getId() == 0) {
-            // new Job, add it
-            this.jobService.addJob(p);
-        } else {
-            // existing Job, call update
-            this.jobService.updateJob(p);
-        }
-
-        return "redirect:/jobs";
-
-    }
-
-    @RequestMapping("/remove/{id}")
-    public String removeJob(@PathVariable("id") int id) {
-        this.jobService.removeJob(id);
-        return "redirect:/jobs";
-    }
-
-    @RequestMapping("/edit/{id}")
-    public String editJob(@PathVariable("id") int id, Model model) {
-        model.addAttribute("job", this.jobService.getJobById(id));
-        model.addAttribute("listJobs", this.jobService.listJobs());
-        return "job";
-    }
     
     @RequestMapping(value = "/job/findParcoursByJobId", method = RequestMethod.POST)
     public String findParcoursByJobId(@RequestParam("jobsId") List<Integer> j, Model model) {

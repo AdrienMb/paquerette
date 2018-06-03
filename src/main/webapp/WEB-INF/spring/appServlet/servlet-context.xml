@@ -44,6 +44,7 @@
                 <beans:value>com.paquerette.myapp.model.Parcours</beans:value>
                 <beans:value>com.paquerette.myapp.model.Domaine</beans:value>
                 <beans:value>com.paquerette.myapp.model.Module</beans:value>
+                <beans:value>com.paquerette.myapp.model.JobParcours</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -67,8 +68,9 @@
     <beans:bean id="moduleDAO" class="com.paquerette.myapp.dao.ModuleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </beans:bean>
-    
-    
+    <beans:bean class="com.paquerette.myapp.dao.JobParcoursDAOImpl" id="jobParcoursDAO">
+		<beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory"/>
+	</beans:bean>
     <beans:bean id="jobService" class="com.paquerette.myapp.service.JobServiceImpl">
         <beans:property name="jobDAO" ref="jobDAO"></beans:property>
     </beans:bean>
@@ -81,6 +83,9 @@
     <beans:bean id="moduleService" class="com.paquerette.myapp.service.ModuleServiceImpl">
         <beans:property name="moduleDAO" ref="moduleDAO"></beans:property>
     </beans:bean>
+    <beans:bean class="com.paquerette.myapp.service.JobParcoursServiceImpl" id="jobParcoursService">
+		<beans:property name="jobParcoursDAO" ref="jobParcoursDAO"/>
+	</beans:bean>
     
     
     <context:component-scan base-package="com.paquerette.myapp" />
