@@ -129,5 +129,84 @@
             value="<spring:message text="Add Job-Parcours"/>" />
     </c:if>  
 </form:form>
+<br>
+<h3>Domaines List</h3>
+<c:if test="${!empty listDomaines}">
+    <table class="tg">
+    <tr>
+        <th width="0">ID</th>
+        <th width="80">Domaine Name</th>
+
+    </tr>
+    <c:forEach items="${listDomaines}" var="domaine">
+        <tr>
+            <td>${domaine.id}</td>
+            <td>${domaine.name}</td>
+            <td><a href="<c:url value='/admin/domaines/edit/${domaine.id}' />" >Edit</a>
+            <a href="<c:url value='/admin/domaines/remove/${domaine.id}' />" >Delete</a></td>
+        </tr>
+    </c:forEach>
+    </table>
+</c:if>
+<c:url var="addDomaine" value="/admin/domaines/add" ></c:url>
+<form:form action="${addDomaine}" commandName="domaine">
+    <c:if test="${!empty domaine.name}">
+         <form:label path="id">
+             <spring:message text="ID"/>
+         </form:label>
+         <form:input path="id" readonly="true" size="8"  disabled="true" />
+         <form:hidden path="id" />
+    </c:if>
+    <form:label path="name">
+        <spring:message text="Name"/>
+    </form:label>
+    <form:input path="name" />
+    <c:if test="${!empty domaine.name}">
+        <input type="submit"
+            value="<spring:message text="Edit Domaine"/>" />
+    </c:if>
+    <c:if test="${empty domaine.name}">
+        <input type="submit"
+            value="<spring:message text="Add Domaine"/>" />
+    </c:if>  
+</form:form>
+<br>
+<h3>Jobs-Domaines List</h3>
+<c:if test="${!empty listJobDomaines}">
+    <table class="tg">
+    <tr>
+        <th width="0">Job_id</th>
+        <th width="80">Domaine_id</th>
+
+    </tr>
+    <c:forEach items="${listJobDomaines}" var="jobdomaine">
+        <tr>
+            <td>${jobdomaine.job_id}</td>
+            <td>${jobdomaine.domaine_id}</td>
+            <td><%-- <a href="<c:url value='/admin/jobparcours/edit/${jobparcours.job_id}/jobdomaine/${jobparcours.jobdomaine}' />" >Edit</a> --%>
+            <a href="<c:url value='/admin/jobdomaine/remove/${jobdomaine.job_id}/domaine_id/${jobdomaine.domaine_id}' />" >Delete</a></td>
+        </tr>
+    </c:forEach>
+    </table>
+</c:if>
+<c:url var="addJobDomaine" value="/admin/jobdomaine/add" ></c:url>
+<form:form action="${addJobDomaine}" commandName="jobdomaine">
+    <form:label path="job_id">
+        <spring:message text="job_id"/>
+    </form:label>
+     <form:input path="job_id" />
+    <form:label path="domaine_id">
+        <spring:message text="domaine_id"/>
+    </form:label>
+    <form:input path="domaine_id" />
+<%--     <c:if test="${!empty jobparcours.job_id && jobparcours.job_id != 0 && !empty jobparcours.parcours_id && jobparcours.parcours_id != 0}">
+        <input type="submit"
+            value="<spring:message text="Edit Job-Parcours"/>" />
+    </c:if> --%>
+    <c:if test="${!(!empty jobdomaine.job_id && jobdomaine.job_id != 0 && !empty jobdomaine.domaine_id && jobdomaine.domaine_id != 0)}">
+        <input type="submit"
+            value="<spring:message text="Add Job-Domaine"/>" />
+    </c:if>  
+</form:form>
 </body>
 </html>

@@ -38,7 +38,10 @@ public class Module {
     @Transient
     private ArrayList<Integer> modulesId = new ArrayList<Integer>();
     
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
     @JoinTable(
         name = "Module_Parcours", 
         joinColumns = { @JoinColumn(name = "module_id") }, 

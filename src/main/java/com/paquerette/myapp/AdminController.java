@@ -14,11 +14,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paquerette.myapp.model.Domaine;
 import com.paquerette.myapp.model.Job;
+import com.paquerette.myapp.model.JobDomaine;
 import com.paquerette.myapp.model.JobParcours;
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.service.JobService;
 import com.paquerette.myapp.service.ParcoursService;
 import com.paquerette.myapp.service.DomaineService;
+import com.paquerette.myapp.service.JobDomaineService;
 import com.paquerette.myapp.service.JobParcoursService;
 
 @Controller
@@ -28,6 +30,7 @@ public class AdminController {
     private DomaineService domaineService;
     private JobParcoursService jobParcoursService;
     private ParcoursService parcoursService;
+    private JobDomaineService jobDomaineService;
 
     @Autowired(required = true)
     @Qualifier(value = "jobService")
@@ -52,6 +55,12 @@ public class AdminController {
     public void setParcoursService(ParcoursService js) {
         this.parcoursService = js;
     }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "jobDomaineService")
+    public void setJobDomaineService(JobDomaineService jds) {
+        this.jobDomaineService = jds;
+    }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String listJobs(Model model) {
@@ -61,6 +70,10 @@ public class AdminController {
         model.addAttribute("listParcours", this.parcoursService.listParcours());
         model.addAttribute("listJobs", this.jobService.listJobs());
         model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
+        model.addAttribute("jobdomaine", new JobDomaine());
+        model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        model.addAttribute("domaine", new Domaine());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
         return "admin";
     }
 
@@ -117,6 +130,10 @@ public class AdminController {
         model.addAttribute("listJobs", this.jobService.listJobs());
         model.addAttribute("jobparcours", new JobParcours());
         model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
+        model.addAttribute("jobdomaine", new JobDomaine());
+        model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        model.addAttribute("domaine", new Domaine());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
         return "admin";
     }
     
@@ -151,7 +168,61 @@ public class AdminController {
         model.addAttribute("parcours", new Parcours());
         model.addAttribute("listParcours", this.parcoursService.listParcours());
         model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
+        model.addAttribute("jobdomaine", new JobDomaine());
+        model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        model.addAttribute("domaine", new Domaine());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
         return "admin";
+    }
+    
+    // For add and update Job both
+    @RequestMapping(value = "admin/domaines/add", method = RequestMethod.POST)
+    public String addDomaine(@ModelAttribute("domaine") Domaine p) {
+
+        if (p.getId() == 0) {
+            // new Job, add it
+            this.domaineService.addDomaine(p);
+        } else {
+            // existing Job, call update
+            this.domaineService.updateDomaine(p);
+        }
+
+        return "redirect:/admin";
+
+    }
+
+    @RequestMapping("admin/domaines/remove/{id}")
+    public String removeDomaine(@PathVariable("id") int id) {
+        this.domaineService.removeDomaine(id);
+        return "redirect:/domaine";
+    }
+
+    @RequestMapping("admin/domaines/edit/{id}")
+    public String editDomaine(@PathVariable("id") int id, Model model) {
+        model.addAttribute("domaine", this.domaineService.getDomaineById(id));
+        model.addAttribute("jobdomaine", new JobDomaine());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
+        model.addAttribute("job", new Job());
+        model.addAttribute("listJobs", this.jobService.listJobs());
+        model.addAttribute("jobparcours", new JobParcours());
+        model.addAttribute("parcours", new Parcours());
+        model.addAttribute("listParcours", this.parcoursService.listParcours());
+        model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
+        model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        return "admin";
+    }
+    
+    @RequestMapping(value = "/admin/jobdomaine/remove/{job_id}/domaine_id/{domaine_id}", method = RequestMethod.GET)
+    public String removeJobDomaine(@PathVariable("job_id") int job_id, @PathVariable("domaine_id") int domaine_id) {
+    	this.jobDomaineService.removeJobDomaine(job_id, domaine_id);
+        return "redirect:/admin";
+    }
+    
+    @RequestMapping(value = "admin/jobdomaine/add", method = RequestMethod.POST)
+    public String addJobDomaine(@ModelAttribute("jobdomaine") JobDomaine p) {
+    	this.jobDomaineService.addJobDomaine(p);
+        return "redirect:/admin";
+
     }
 
 }

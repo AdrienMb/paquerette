@@ -31,7 +31,15 @@ public class Domaine {
     @Column(name = "domaine_name")
     private String name;
     
-    @ManyToMany(mappedBy = "domaines")
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
+    @JoinTable(
+        name = "Job_Domaine", 
+        joinColumns = { @JoinColumn(name = "domaine_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "job_id") }
+    )
     List<Job> jobs = new ArrayList<Job>();
 
     public int getId() {

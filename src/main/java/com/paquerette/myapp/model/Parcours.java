@@ -5,11 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -31,10 +35,26 @@ public class Parcours {
     @Column(name = "parcours_link_isep")
     private String link;
     
-    @ManyToMany(mappedBy = "parcours")
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
+    @JoinTable(
+        name = "Job_Parcours", 
+        joinColumns = { @JoinColumn(name = "parcours_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "job_id")}
+    )
     private List<Job> jobs = new ArrayList<Job>();
     
-    @ManyToMany(mappedBy = "parcoursModule")
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
+    @JoinTable(
+        name = "Module_Parcours", 
+        joinColumns = { @JoinColumn(name = "parcours_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "module_id") }
+    )
     private List<Module> modules = new ArrayList<Module>();
 
     public int getId() {

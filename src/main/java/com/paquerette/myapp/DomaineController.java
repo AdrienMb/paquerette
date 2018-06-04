@@ -29,33 +29,4 @@ public class DomaineController {
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
         return "jobs";
     }
-
-    // For add and update Job both
-    @RequestMapping(value = "/domaines/add", method = RequestMethod.POST)
-    public String addDomaine(@ModelAttribute("domaine") Domaine p) {
-
-        if (p.getId() == 0) {
-            // new Job, add it
-            this.domaineService.addDomaine(p);
-        } else {
-            // existing Job, call update
-            this.domaineService.updateDomaine(p);
-        }
-
-        return "redirect:/domaine";
-
-    }
-
-    @RequestMapping("/domaine/remove/{id}")
-    public String removeDomaine(@PathVariable("id") int id) {
-        this.domaineService.removeDomaine(id);
-        return "redirect:/domaine";
-    }
-
-    @RequestMapping("/domaine/edit/{id}")
-    public String editDomaine(@PathVariable("id") int id, Model model) {
-        model.addAttribute("domaine", this.domaineService.getDomaineById(id));
-        model.addAttribute("listDomaines", this.domaineService.listDomaines());
-        return "domaine";
-    }
 }
