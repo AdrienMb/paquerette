@@ -5,20 +5,25 @@
 <html>
 <head>
     <title>Parcours Isep</title>
-    <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-        .tg .tg-4eph{background-color:#f9f9f9}
-    </style>
+    <script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="/myapp/resources/style.css">
 </head>
 <body>
-<h1>Parcours Isep</h1>
-<p>
-${message}<br/>
-<a href="${pageContext.request.contextPath}/jobs">Choisir mon parcours via les métiers</a><br/>
-<a href="${pageContext.request.contextPath}/modules">Choisir mon parcours via les modules</a><br/>
-<a href="${pageContext.request.contextPath}/prerequis">Choisir mon parcours via les prerequis</a><br/>
-</p>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><img class="logo" src="/myapp/resources/logo.png"/></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="${pageContext.request.contextPath}/jobs">Par métier</a></li>
+      <li><a href="${pageContext.request.contextPath}/modules">Par module</a></li>
+      <li><a href="${pageContext.request.contextPath}/prerequis">Avec notes</a></li>
+      <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
+    </ul>
+  </div>
+</nav>
+
 </body>
 </html>

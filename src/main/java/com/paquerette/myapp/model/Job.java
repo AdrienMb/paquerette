@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,15 +33,24 @@ public class Job {
     @Column(name = "job_name")
     private String name;
     
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @Transient
+    private ArrayList<Integer> jobsId = new ArrayList<Integer>();
+    
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
     @JoinTable(
         name = "Job_Parcours", 
         joinColumns = { @JoinColumn(name = "job_id") }, 
-        inverseJoinColumns = { @JoinColumn(name = "parcours_id") }
+        inverseJoinColumns = { @JoinColumn(name = "parcours_id")}
     )
     List<Parcours> parcours = new ArrayList<Parcours>();
     
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
     @JoinTable(
         name = "Job_Domaine", 
         joinColumns = { @JoinColumn(name = "job_id") }, 
@@ -106,5 +116,9 @@ public class Job {
             return false;
         return true;
     }
+    
+    public List<Integer> getJobsId() {
+		return jobsId;
+	}
 
 }

@@ -8,6 +8,7 @@ import org.hibernate.mapping.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.paquerette.myapp.model.Domaine;
 import com.paquerette.myapp.model.Job;
@@ -68,6 +69,7 @@ public class JobDAOImpl implements JobDAO {
     }
     
     @Override
+    @Transactional
     public List<Parcours> findParcoursByJobId(int id) {
     	Session session = this.sessionFactory.getCurrentSession();
         Job j = (Job) session.load(Job.class, new Integer(id));

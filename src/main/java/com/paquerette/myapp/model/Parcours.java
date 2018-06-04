@@ -5,11 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -31,10 +35,26 @@ public class Parcours {
     @Column(name = "parcours_link_isep")
     private String link;
     
-    @ManyToMany(mappedBy = "parcours")
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
+    @JoinTable(
+        name = "Job_Parcours", 
+        joinColumns = { @JoinColumn(name = "parcours_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "job_id")}
+    )
     private List<Job> jobs = new ArrayList<Job>();
     
-    @ManyToMany(mappedBy = "parcoursModule")
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
+    @JoinTable(
+        name = "Module_Parcours", 
+        joinColumns = { @JoinColumn(name = "parcours_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "module_id") }
+    )
     private List<Module> modules = new ArrayList<Module>();
 
     public int getId() {
@@ -81,4 +101,27 @@ public class Parcours {
         return "Parcours [id=" + id + ", name=" + name + "link= "+ link +"]";
     }
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Parcours other = (Parcours) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 }

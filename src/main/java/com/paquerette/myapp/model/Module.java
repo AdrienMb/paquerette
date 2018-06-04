@@ -10,18 +10,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;	
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Entity bean with JPA annotations Hibernate provides JPA implementation
  */
 @Entity
-@Table(name = "Module")
+@Table(name = "MODULE")
 public class Module {
 
     @Id
@@ -34,22 +34,20 @@ public class Module {
     
     @Column(name = "module_description")
     private String desc;
+
+    @Transient
+    private ArrayList<Integer> modulesId = new ArrayList<Integer>();
     
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
     @JoinTable(
         name = "Module_Parcours", 
         joinColumns = { @JoinColumn(name = "module_id") }, 
         inverseJoinColumns = { @JoinColumn(name = "parcours_id") }
     )
     List<Parcours> parcoursModule = new ArrayList<Parcours>();
-
-
-    @OneToMany(
-            mappedBy = "module", 
-            cascade = CascadeType.ALL, 
-            orphanRemoval = true
-        )
-    List<Module_Prerequis> prerequis = new ArrayList<Module_Prerequis>();
 
     public int getId() {
 		return id;
@@ -67,10 +65,23 @@ public class Module {
 		this.name = name;
 	}
 
+	public List<Parcours> getParcours() {
+		return parcoursModule;
+	}
+
 
 	@Override
     public String toString() {
         return "Module [id=" + id + ", name=" + name +", desc=" + desc+ "]";
     }
+
+	public List<Integer> getModulesId() {
+		return modulesId;
+	}
+
+	public void setModulesId(ArrayList<Integer> modules) {
+		this.modulesId = modules;
+	}
+
 
 }

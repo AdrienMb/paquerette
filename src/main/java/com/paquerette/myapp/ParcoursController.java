@@ -29,33 +29,4 @@ public class ParcoursController {
         model.addAttribute("listParcours", this.parcoursService.listParcours());
         return "parcours";
     }
-
-    // For add and update Job both
-    @RequestMapping(value = "/parcours/add", method = RequestMethod.POST)
-    public String addParcours(@ModelAttribute("parcours") Parcours p) {
-
-        if (p.getId() == 0) {
-            // new Job, add it
-            this.parcoursService.addParcours(p);
-        } else {
-            // existing Job, call update
-            this.parcoursService.updateParcours(p);
-        }
-
-        return "redirect:/parcours";
-
-    }
-
-    @RequestMapping("/parcours/remove/{id}")
-    public String removeParcours(@PathVariable("id") int id) {
-        this.parcoursService.removeParcours(id);
-        return "redirect:/parcours";
-    }
-
-    @RequestMapping("/parcours/edit/{id}")
-    public String editParcours(@PathVariable("id") int id, Model model) {
-        model.addAttribute("parcours", this.parcoursService.getParcoursById(id));
-        model.addAttribute("listParcours", this.parcoursService.listParcours());
-        return "parcours";
-    }
 }
