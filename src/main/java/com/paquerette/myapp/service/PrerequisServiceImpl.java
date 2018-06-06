@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.paquerette.myapp.dao.PrerequisDAO;
 import com.paquerette.myapp.dao.PrerequisDAOImpl;
 import com.paquerette.myapp.model.Prerequis;
-import com.paquerette.myapp.model.Module_Prerequis;
+import com.paquerette.myapp.model.Prerequis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class PrerequisServiceImpl implements PrerequisService {
 ////		return null;
 //        return this.prerequisDAO.getAllPrerequis();
 //	}
-	public List<Module_Prerequis> getAllPrerequis() {
+	public List<Prerequis> getAllPrerequis() {
 		logger.info("######################SERVICE#########################################");
         return prerequisDAO.getAllPrerequis();
 	}

@@ -44,7 +44,6 @@
                 <beans:value>com.paquerette.myapp.model.Parcours</beans:value>
                 <beans:value>com.paquerette.myapp.model.Domaine</beans:value>
                 <beans:value>com.paquerette.myapp.model.Prerequis</beans:value>
-                <beans:value>com.paquerette.myapp.model.Module_Prerequis</beans:value>
                 <beans:value>com.paquerette.myapp.model.Module</beans:value>
                 <beans:value>com.paquerette.myapp.model.JobParcours</beans:value>
                 <beans:value>com.paquerette.myapp.model.JobDomaine</beans:value>

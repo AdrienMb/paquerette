@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.model.Prerequis;
-import com.paquerette.myapp.model.Module_Prerequis;
+import com.paquerette.myapp.model.Prerequis;
 
 @Repository("prerequisDAO")
 public class PrerequisDAOImpl implements PrerequisDAO {
@@ -24,10 +24,10 @@ public class PrerequisDAOImpl implements PrerequisDAO {
     }
 
 	@Override
-	public List<Module_Prerequis> getAllPrerequis() {
+	public List<Prerequis> getAllPrerequis() {
 		Session session = this.sessionFactory.getCurrentSession();
-        List<Module_Prerequis> p = session.createQuery("select mp from Module_Prerequis mp ,module m,prerequis p where mp.module_id=m.module_id and mp.prerequis_id=p.prerequis_id ").list();
-        for (Module_Prerequis i:p) {
+        List<Prerequis> p = session.createQuery("from Prerequis").list();
+        for (Prerequis i:p) {
         	logger.info("Parcours List::" + i.getModule());
         }
         ;
