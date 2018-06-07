@@ -60,36 +60,3 @@ CONSTRAINT fk_prerequis FOREIGN KEY (prerequis_id) REFERENCES prerequis (prerequ
 );
 
 
-INSERT INTO job (job_name) VALUES ('dev');
-INSERT INTO job (job_name) VALUES ('devops');
-INSERT INTO job (job_name) VALUES ('teacher');
-
-INSERT INTO domaine (domaine_name) VALUES ('Electronique');
-INSERT INTO domaine (domaine_name) VALUES ('Informatique');
-INSERT INTO domaine (domaine_name) VALUES ('Commercial');
-
-INSERT INTO parcours (parcours_name, parcours_link_isep) VALUES ('Ingénieur logiciel', 'https://www.isep.fr/cycle-ingenieur/parcours-ingenieur-logiciel/');
-INSERT INTO parcours (parcours_name, parcours_link_isep) VALUES ('Ingénieur numérique et santé', 'https://www.isep.fr/cycle-ingenieur/parcours-ingenieur-numerique-et-sante/');
-
-INSERT INTO module (module_name, module_description) VALUES ('Techno web', 'Etudier les technologies avec des technologies Java');
-INSERT INTO module (module_name, module_description) VALUES ('Génie logiciel', 'Travailler la gestion de projet agile');
-
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('1', '1');
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('1', '2');
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('2', '1');
-INSERT INTO job_parcours (job_id, parcours_id) VALUES ('3', '2');
-
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('3', '1');
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('1', '2');
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('2', '2');
-INSERT INTO job_domaine (job_id, domaine_id) VALUES ('3', '3');
-
-INSERT INTO module_parcours (module_id, parcours_id) VALUES ('1', '1');
-INSERT INTO module_parcours (module_id, parcours_id) VALUES ('2', '1');
-INSERT INTO module_parcours (module_id, parcours_id) VALUES ('2', '2');
-
-INSERT INTO prerequis (prerequis_name,typeEvaluation,requis) VALUES ('ALGORITHMIQUE ET PROGRAMMATION','notes','12');
-INSERT INTO prerequis (prerequis_name,typeEvaluation,requis) VALUES ('PROBABILITE','notes','12');
-
-INSERT INTO module_prerequis (module_id,prerequis_id) VALUES ('1','1');
-INSERT INTO module_prerequis (module_id,prerequis_id) VALUES ('1','2');
