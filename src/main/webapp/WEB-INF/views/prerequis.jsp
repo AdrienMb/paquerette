@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false"%>
+<jsp:include page="home.jsp" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,21 +12,28 @@
 <title>Note Page</title>
 </head>
 <body>
-<h3>Prerequis List</h3>
+<div class="container">
+<div class="row">
+ <div class="col-md-3">
+<h3>Choisissez votre parcours selon vos compétences</h3><br>
+ <p>Selectionnez votre niveau dans les différents secteur</p>
+ </div>
+ <div class="col-md-1">
+ </div>
+  <div class="col-md-8">
 <form:form action="/prerequis/findParcoursByprerequis"
-			method="POST" modelAttribute="prerequis">
-			
-		<%-- <c:forEach items="${listPrerequis}" varStatus="i">
-           <form:input path="fooList[${i.index}].name" type="text"/>
-    </c:forEach> --%>
+			method="POST" modelAttribute="prerequis">	
 <c:forEach items="${listPrerequis}" varStatus="i" var = "prerequis">
-<%-- <c:out value="${ status.count }" /> : <c:out value="${ prerequis.requis }" /> --%>
-        <h4>${prerequis.name}
-        <form:input  type="number" class="prerequis" name="${prerequis.requis}" path ="requis" /> <br>
+        <h4>${prerequis.name}</h4>
+        <form:input class="prerequis" name="${prerequis.requis}" path ="requis" /> <br>
         <form:input type="hidden" class="prerequis" name="${prerequis.id}" value="${prerequis.id}"  path ="id" /> <br>
         
 </c:forEach> 
 <button type= "submit">submit</button>
 </form:form>
+</div>
+</div>
+</div>
+<%@include  file="footer.html" %>
 </body>
 </html>
