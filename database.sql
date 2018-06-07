@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS job (
+﻿CREATE TABLE IF NOT EXISTS job (
 job_id SERIAL PRIMARY KEY NOT NULL,
 job_name char(200) NULL
 );
@@ -46,14 +46,14 @@ CONSTRAINT fk_parcours FOREIGN KEY (parcours_id) REFERENCES parcours (parcours_i
 
 CREATE TABLE IF NOT EXISTS prerequis (
 prerequis_id SERIAL PRIMARY KEY NOT NULL,
-prerequis_name char(200) NULL
+prerequis_name char(200) NULL,
+typeEvaluation text NOT NULL,
+requis INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS module_prerequis (
 module_id INT NOT NULL,
 prerequis_id INT NOT NULL,
-typeEvaluation text NOT NULL,
-requis INT NOT NULL,
 PRIMARY KEY (module_id, prerequis_id),
 CONSTRAINT fk_module FOREIGN KEY (module_id) REFERENCES module (module_id),
 CONSTRAINT fk_prerequis FOREIGN KEY (prerequis_id) REFERENCES prerequis (prerequis_id)
@@ -88,6 +88,8 @@ INSERT INTO module_parcours (module_id, parcours_id) VALUES ('1', '1');
 INSERT INTO module_parcours (module_id, parcours_id) VALUES ('2', '1');
 INSERT INTO module_parcours (module_id, parcours_id) VALUES ('2', '2');
 
-INSERT INTO prerequis (prerequis_name) VALUES ('ALGORITHMIQUE ET PROGRAMMATION');
+INSERT INTO prerequis (prerequis_name,typeEvaluation,requis) VALUES ('ALGORITHMIQUE ET PROGRAMMATION','notes','12');
+INSERT INTO prerequis (prerequis_name,typeEvaluation,requis) VALUES ('PROBABILITE','notes','12');
 
-INSERT INTO module_prerequis (module_id,prerequis_id,typeEvaluation,requis) VALUES ('1','1','notes','12');
+INSERT INTO module_prerequis (module_id,prerequis_id) VALUES ('1','1');
+INSERT INTO module_prerequis (module_id,prerequis_id) VALUES ('1','2');

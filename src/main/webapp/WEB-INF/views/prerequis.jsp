@@ -13,7 +13,7 @@
 <body>
 <h3>Prerequis List</h3>
 <form:form action="/prerequis/findParcoursByprerequis"
-			method="POST" modelAttribute="listPrerequis">
+			method="POST" modelAttribute="prerequis">
 			
 		<%-- <c:forEach items="${listPrerequis}" varStatus="i">
            <form:input path="fooList[${i.index}].name" type="text"/>
@@ -21,7 +21,9 @@
 <c:forEach items="${listPrerequis}" varStatus="i" var = "prerequis">
 <%-- <c:out value="${ status.count }" /> : <c:out value="${ prerequis.requis }" /> --%>
         <h4>${prerequis.name}
-        <form:input type="number" class="prerequis" name="${prerequis.requis}" path ="requis" /> <br>
+        <form:input  type="number" class="prerequis" name="${prerequis.requis}" path ="requis" /> <br>
+        <form:input type="hidden" class="prerequis" name="${prerequis.id}" value="${prerequis.id}"  path ="id" /> <br>
+        
 </c:forEach> 
 <button type= "submit">submit</button>
 </form:form>
