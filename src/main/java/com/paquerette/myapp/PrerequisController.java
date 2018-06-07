@@ -28,7 +28,6 @@ import com.paquerette.myapp.service.ModuleService;
 public class PrerequisController {
 
 	private PrerequisService prerequisService;
-    private DomaineService domaineService;
     private ModuleService ModuleService;
 
     @Autowired(required = true)
