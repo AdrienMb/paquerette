@@ -24,6 +24,19 @@
   </div>
   </nav>
   
+  <div>
+    <form:form name="f" action="/login" method="post" modelAttribute="user">               
+      <fieldset>
+        <label for="username">Identifiant</label>
+        <form:input type="text" id="username" path="name"/> <br>      
+        <label for="password">Mot de passe</label>
+        <form:input type="password" id="password" path="password"/>  <br>  
+        <div class="form-actions">
+          <button type="submit" class="btn">Log in</button>
+        </div>
+      </fieldset>
+       </form:form>
+  </div>
+<%@include  file="footer.html" %>
 </body>
 </html>
-
