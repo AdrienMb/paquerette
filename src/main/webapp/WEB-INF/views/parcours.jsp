@@ -17,7 +17,9 @@
  
 <c:forEach items="${listParcours}" var="parcours">
 <div class="col-md-4 parcours">
-        <a href="${parcours.key.link}">${parcours.key.name}</a> <br>Correspondance : ${parcours.value}%<br>
+        <a href="${parcours.key.link}">${parcours.key.name}</a> <br>
+        Correspondance : ${parcours.value}%<br>
+        Métiers: ${parcoursJobs.get(parcours.key)}
         </div>
 </c:forEach>
 </div>

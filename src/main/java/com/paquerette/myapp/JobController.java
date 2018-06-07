@@ -2,8 +2,10 @@ package com.paquerette.myapp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -50,8 +52,9 @@ public class JobController {
     
     @RequestMapping(value = "/job/findParcoursByJobId", method = RequestMethod.POST)
     public String findParcoursByJobId(@RequestParam("jobsId") List<Integer> j, Model model) {
-        List<Job> jobss=new ArrayList<Job>();
 		Map<Parcours,Integer> hm = new HashMap<Parcours,Integer>();
+		Map<Parcours, String> parcours_jobs = new HashMap<Parcours, String>();
+		Map<Parcours, Set<String>> parcours_jobnamelist = new HashMap<Parcours, Set<String>>();
 		int nbReq=j.size();
 		for(Integer job : j) {
 			for(Parcours parcoursi : this.jobService.findParcoursByJobId(job)) {
@@ -62,13 +65,21 @@ public class JobController {
 					nb++;
 					hm.put(parcoursi,nb);
 				}
+				if (!parcours_jobnamelist.containsKey(parcoursi)) {
+					parcours_jobnamelist.put(parcoursi, new HashSet<String>());
+				}
+				Set<String> s = parcours_jobnamelist.get(parcoursi);
+				s.add(this.jobService.getJobById(job).getName());
+				parcours_jobnamelist.put(parcoursi, s);
 			}
 		}
 		for(Parcours p : hm.keySet()) {
 			int nb = hm.get(p);
 			nb=(int)(nb*100/nbReq);
 			hm.put(p,nb);
+			parcours_jobs.put(p, String.join("/ ", parcours_jobnamelist.get(p)));
 		}
+		model.addAttribute("parcoursJobs", parcours_jobs);
 		model.addAttribute("listParcours", hm);
 		return "parcours";
     }
