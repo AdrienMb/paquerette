@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.paquerette.myapp.model.Module;
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.service.ModuleService;
-import com.paquerette.myapp.service.DomaineService;
+
 
 @Controller
 public class ModuleController {
 
 	private ModuleService ModuleService;
-	private DomaineService domaineService;
+
 
 	@Autowired(required = true)
 	@Qualifier(value = "moduleService")
@@ -36,16 +36,9 @@ public class ModuleController {
 		this.ModuleService = ms;
 	}
 
-	@Autowired(required = true)
-	@Qualifier(value = "domaineService")
-	public void setDomaineService(DomaineService ds) {
-		this.domaineService = ds;
-	}
-
 	@RequestMapping(value = "/modules", method = RequestMethod.GET)
 	public String listModules(Model model) {
 		model.addAttribute("module", new Module());
-		model.addAttribute("listDomaines", this.domaineService.listDomaines());
 		model.addAttribute("listModules", this.ModuleService.listModules());
 		return "module";
 	}

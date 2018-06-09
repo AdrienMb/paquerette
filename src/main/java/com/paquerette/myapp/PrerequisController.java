@@ -29,7 +29,6 @@ import com.paquerette.myapp.service.ParcoursService;
 public class PrerequisController {
 
 	private PrerequisService prerequisService;
-    private DomaineService domaineService;
     private ModuleService ModuleService;
     private ParcoursService parcoursService;
     
