@@ -48,8 +48,27 @@ public class Module {
         inverseJoinColumns = { @JoinColumn(name = "parcours_id") }
     )
     List<Parcours> parcoursModule = new ArrayList<Parcours>();
+    
+    @ManyToMany(cascade = { CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST })
+    @JoinTable(
+        name = "Module_Prerequis", 
+        joinColumns = { @JoinColumn(name = "module_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "prerequis_id")}
+    )
+    List<Prerequis> prerequis = new ArrayList<Prerequis>();
 
-    public int getId() {
+    public List<Prerequis> getPrerequis() {
+		return prerequis;
+	}
+
+	public void setPrerequis(List<Prerequis> prerequis) {
+		this.prerequis = prerequis;
+	}
+
+	public int getId() {
 		return id;
 	}
 

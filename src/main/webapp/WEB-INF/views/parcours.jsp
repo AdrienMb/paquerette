@@ -19,7 +19,14 @@
 <div class="col-md-4 parcours">
         <a href="${parcours.key.link}">${parcours.key.name}</a> <br>
         Correspondance : ${parcours.value}%<br>
-        Métiers: ${parcoursJobs.get(parcours.key)}
+        <c:if test="${!empty parcoursJobs.get(parcours.key)}">
+        	Métiers: ${parcoursJobs.get(parcours.key)}
+        </c:if>
+        <c:if test="${!empty parcoursNotes}">
+        	<c:forEach items="${parcoursNotes.get(parcours.key)}" var="prerequis">
+        		<font color="${prerequis.value}">${prerequis.key.name} (${prerequis.key.requis})</font><br>
+        	</c:forEach>
+        </c:if>
         </div>
 </c:forEach>
 </div>

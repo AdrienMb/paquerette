@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.paquerette.myapp.model.Module;
 import com.paquerette.myapp.model.Parcours;
 
 @Repository("parcoursDAO")
@@ -42,6 +43,9 @@ public class ParcoursDAOImpl implements ParcoursDAO {
         List<Parcours> ParcourssList = session.createQuery("from Parcours").list();
         for (Parcours p : ParcourssList) {
             logger.info("Parcours List::" + p);
+            for (Module m : p.getModules()) {
+            	logger.info("Prerequis::" + m.getPrerequis());
+            }
         }
         return ParcourssList;
     }
