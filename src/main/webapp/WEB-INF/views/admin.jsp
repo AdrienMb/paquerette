@@ -229,6 +229,49 @@
 				</form:form>
 				<br>
 			</div>
+			<div class="col-md-6">
+				<h3>Modules List</h3>
+				<c:if test="${!empty listModules}">
+					<table class="tg">
+						<tr>
+							<th width="0">ID</th>
+							<th width="80">Module Name</th>
+
+						</tr>
+						<c:forEach items="${listModules}" var="module">
+							<tr>
+								<td>${module.id}</td>
+								<td>${module.name}</td>
+								<td><a
+									href="<c:url value='/admin/modules/edit/${module.id}' />">Edit</a>
+									<a
+									href="<c:url value='/admin/modules/remove/${module.id}' />">Delete</a></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:url var="addModule" value="/admin/modules/add"></c:url>
+				<form:form action="${addModule}" commandName="module">
+					<c:if test="${!empty module.name}">
+						<form:label path="id">
+							<spring:message text="ID" />
+						</form:label>
+						<form:input path="id" readonly="true" size="8" disabled="true" />
+						<form:hidden path="id" />
+					</c:if>
+					<form:label path="name">
+						<spring:message text="Name" />
+					</form:label>
+					<form:input path="name" />
+					<c:if test="${!empty module.name}">
+						<input type="submit" value="<spring:message text="Edit Module"/>" />
+					</c:if>
+					<c:if test="${empty module.name}">
+						<input type="submit" value="<spring:message text="Add Module"/>" />
+					</c:if>
+				</form:form>
+				<br>
+			</div>
 		</div>
 	</div>
 </body>

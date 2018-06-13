@@ -16,8 +16,10 @@ import com.paquerette.myapp.model.Domaine;
 import com.paquerette.myapp.model.Job;
 import com.paquerette.myapp.model.JobDomaine;
 import com.paquerette.myapp.model.JobParcours;
+import com.paquerette.myapp.model.Module;
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.service.JobService;
+import com.paquerette.myapp.service.ModuleService;
 import com.paquerette.myapp.service.ParcoursService;
 import com.paquerette.myapp.service.DomaineService;
 import com.paquerette.myapp.service.JobDomaineService;
@@ -31,11 +33,18 @@ public class AdminController {
     private JobParcoursService jobParcoursService;
     private ParcoursService parcoursService;
     private JobDomaineService jobDomaineService;
+    private ModuleService moduleService;
 
     @Autowired(required = true)
     @Qualifier(value = "jobService")
     public void setJobService(JobService ps) {
         this.jobService = ps;
+    }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "moduleService")
+    public void setModuleService(ModuleService ms) {
+        this.moduleService = ms;
     }
     
     @Autowired(required = true)
@@ -74,6 +83,8 @@ public class AdminController {
         model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
         model.addAttribute("domaine", new Domaine());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
+        model.addAttribute("module", new Module());
+        model.addAttribute("listModules", this.moduleService.listModules());
         return "admin";
     }
 
@@ -134,6 +145,8 @@ public class AdminController {
         model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
         model.addAttribute("domaine", new Domaine());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
+        model.addAttribute("module", new Module());
+        model.addAttribute("listModules", this.moduleService.listModules());
         return "admin";
     }
     
@@ -142,17 +155,6 @@ public class AdminController {
     	this.jobParcoursService.removeJobParcours(job_id, parcours_id);
         return "redirect:/admin";
     }
-    
-//    @RequestMapping(value = "/admin/jobparcours/edit/{job_id}/parcours_id/{parcours_id}", method = RequestMethod.GET)
-//    public String editJobParcours(@PathVariable("job_id") int job_id, @PathVariable("parcours_id") int parcours_id, Model model) {
-//    	model.addAttribute("jobparcours", this.jobParcoursService.getJobParcoursById(job_id, parcours_id));
-//    	model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
-//        model.addAttribute("job", new Job());
-//        model.addAttribute("parcours", new Parcours());
-//        model.addAttribute("listParcours", this.parcoursService.listParcours());
-//        model.addAttribute("listJobs", this.jobService.listJobs());
-//        return "admin";
-//    }
 
     @RequestMapping(value = "/admin/jobs/remove/{id}", method = RequestMethod.GET)
     public String removeJob(@PathVariable("id") int id) {
@@ -172,18 +174,20 @@ public class AdminController {
         model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
         model.addAttribute("domaine", new Domaine());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
+        model.addAttribute("module", new Module());
+        model.addAttribute("listModules", this.moduleService.listModules());
         return "admin";
     }
     
-    // For add and update Job both
+    // For add and update domaine both
     @RequestMapping(value = "admin/domaines/add", method = RequestMethod.POST)
     public String addDomaine(@ModelAttribute("domaine") Domaine p) {
 
         if (p.getId() == 0) {
-            // new Job, add it
+            // new domaine, add it
             this.domaineService.addDomaine(p);
         } else {
-            // existing Job, call update
+            // existing domaine, call update
             this.domaineService.updateDomaine(p);
         }
 
@@ -194,7 +198,7 @@ public class AdminController {
     @RequestMapping("admin/domaines/remove/{id}")
     public String removeDomaine(@PathVariable("id") int id) {
         this.domaineService.removeDomaine(id);
-        return "redirect:/domaine";
+        return "redirect:/admin";
     }
 
     @RequestMapping("admin/domaines/edit/{id}")
@@ -209,6 +213,47 @@ public class AdminController {
         model.addAttribute("listParcours", this.parcoursService.listParcours());
         model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
         model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        model.addAttribute("module", new Module());
+        model.addAttribute("listModules", this.moduleService.listModules());
+        return "admin";
+    }
+    
+ // For add and update module both
+    @RequestMapping(value = "admin/modules/add", method = RequestMethod.POST)
+    public String addModule(@ModelAttribute("module") Module m) {
+
+        if (m.getId() == 0) {
+            // new Job, add it
+            this.moduleService.addModule(m);
+        } else {
+            // existing Job, call update
+            this.moduleService.updateModule(m);
+        }
+
+        return "redirect:/admin";
+
+    }
+
+    @RequestMapping("admin/modules/remove/{id}")
+    public String removeModule(@PathVariable("id") int id) {
+        this.moduleService.removeModule(id);
+        return "redirect:/admin";
+    }
+
+    @RequestMapping("admin/modules/edit/{id}")
+    public String editModule(@PathVariable("id") int id, Model model) {
+    	model.addAttribute("domaine", new Domaine());
+        model.addAttribute("jobdomaine", new JobDomaine());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
+        model.addAttribute("job", new Job());
+        model.addAttribute("listJobs", this.jobService.listJobs());
+        model.addAttribute("jobparcours", new JobParcours());
+        model.addAttribute("parcours", new Parcours());
+        model.addAttribute("listParcours", this.parcoursService.listParcours());
+        model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
+        model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        model.addAttribute("module", this.moduleService.getModuleById(id));
+        model.addAttribute("listModules", this.moduleService.listModules());
         return "admin";
     }
     
