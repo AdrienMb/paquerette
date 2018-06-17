@@ -47,6 +47,8 @@
                 <beans:value>com.paquerette.myapp.model.Module</beans:value>
                 <beans:value>com.paquerette.myapp.model.JobParcours</beans:value>
                 <beans:value>com.paquerette.myapp.model.JobDomaine</beans:value>
+                <beans:value>com.paquerette.myapp.model.ModuleParcours</beans:value>
+                <beans:value>com.paquerette.myapp.model.ModulePrerequis</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -79,6 +81,12 @@
 	<beans:bean class="com.paquerette.myapp.dao.JobDomaineDAOImpl" id="jobDomaineDAO">
 		<beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory"/>
 	</beans:bean>
+	<beans:bean class="com.paquerette.myapp.dao.ModuleParcoursDAOImpl" id="moduleParcoursDAO">
+		<beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory"/>
+	</beans:bean>
+	<beans:bean class="com.paquerette.myapp.dao.ModulePrerequisDAOImpl" id="modulePrerequisDAO">
+		<beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory"/>
+	</beans:bean>
 	
 
     <beans:bean id="jobService" class="com.paquerette.myapp.service.JobServiceImpl">
@@ -101,6 +109,12 @@
 	</beans:bean>
 	<beans:bean class="com.paquerette.myapp.service.JobDomaineServiceImpl" id="jobDomaineService">
 		<beans:property name="jobDomaineDAO" ref="jobDomaineDAO"/>
+	</beans:bean>
+	<beans:bean class="com.paquerette.myapp.service.ModulePrerequisServiceImpl" id="modulePrerequisService">
+		<beans:property name="modulePrerequisDAO" ref="modulePrerequisDAO"/>
+	</beans:bean>
+	<beans:bean class="com.paquerette.myapp.service.ModuleParcoursServiceImpl" id="moduleParcoursService">
+		<beans:property name="moduleParcoursDAO" ref="moduleParcoursDAO"/>
 	</beans:bean>
     
 

@@ -55,7 +55,7 @@ public class PrerequisController {
 	@RequestMapping(value = "/prerequis", method = RequestMethod.GET)
 	public String getAllPrequis(Model model) {
 	model.addAttribute("prerequis", new Prerequis());
-   	model.addAttribute("listPrerequis", this.prerequisService.getAllPrerequis());
+   	model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
         return "prerequis";
     }
 	@RequestMapping(value = "/prerequis/findParcoursByprerequis", method = RequestMethod.POST)

@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.paquerette.myapp.dao.PrerequisDAO;
 import com.paquerette.myapp.dao.PrerequisDAOImpl;
 import com.paquerette.myapp.model.Prerequis;
+import com.paquerette.myapp.model.Parcours;
+import com.paquerette.myapp.model.Prerequis;
 import com.paquerette.myapp.model.Prerequis;
 
 import org.slf4j.Logger;
@@ -27,15 +29,39 @@ public class PrerequisServiceImpl implements PrerequisService {
 
 	@Override
 	@Transactional
-//	public List<Prerequis> getAllPrerequis() {
+//	public List<Prerequis> listPrerequis() {
 //		logger.info("######################SERVICE#########################################");
 ////		return null;
-//        return this.prerequisDAO.getAllPrerequis();
+//        return this.prerequisDAO.listPrerequis();
 //	}
-	public List<Prerequis> getAllPrerequis() {
+	public List<Prerequis> listPrerequis() {
 		logger.info("######################SERVICE#########################################");
-        return prerequisDAO.getAllPrerequis();
+        return prerequisDAO.listPrerequis();
 	}
+	
+	@Override
+    @Transactional
+    public void addPrerequis(Prerequis p) {
+        this.prerequisDAO.addPrerequis(p);
+    }
+
+    @Override
+    @Transactional
+    public void updatePrerequis(Prerequis p) {
+        this.prerequisDAO.updatePrerequis(p);
+    }
+
+    @Override
+    @Transactional
+    public Prerequis getPrerequisById(int id) {
+        return this.prerequisDAO.getPrerequisById(id);
+    }
+
+    @Override
+    @Transactional
+    public void removePrerequis(int id) {
+        this.prerequisDAO.removePrerequis(id);
+    }
 
 
 }

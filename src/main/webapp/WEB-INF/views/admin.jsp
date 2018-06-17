@@ -140,6 +140,88 @@
 				</form:form>
 				<br>
 			</div>
+			<div class="col-md-6">
+				<h3>Module-Parcours List</h3>
+				<c:if test="${!empty listModuleParcours}">
+					<table class="tg">
+						<tr>
+							<th width="0">Module_id</th>
+							<th width="80">Parcours_id</th>
+
+						</tr>
+						<c:forEach items="${listModuleParcours}" var="moduleparcours">
+							<tr>
+								<td>${moduleparcours.module_id}</td>
+								<td>${moduleparcours.parcours_id}</td>
+								<td>
+									<%-- <a href="<c:url value='/admin/jobparcours/edit/${jobparcours.job_id}/parcours_id/${jobparcours.parcours_id}' />" >Edit</a> --%>
+									<a
+									href="<c:url value='/admin/moduleparcours/remove/${moduleparcours.module_id}/parcours_id/${moduleparcours.parcours_id}' />">Delete</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:url var="addModuleParcours" value="/admin/moduleparcours/add"></c:url>
+				<form:form action="${addModuleParcours}" commandName="moduleparcours">
+					<form:label path="module_id">
+						<spring:message text="module_id" />
+					</form:label>
+					<form:input path="module_id" />
+					<form:label path="parcours_id">
+						<spring:message text="parcours_id" />
+					</form:label>
+					<form:input path="parcours_id" />
+					<%--     <c:if test="${!empty jobparcours.job_id && jobparcours.job_id != 0 && !empty jobparcours.parcours_id && jobparcours.parcours_id != 0}">
+        <input type="submit"
+            value="<spring:message text="Edit Job-Parcours"/>" />
+    </c:if> --%>
+					<c:if
+						test="${!(!empty moduleparcours.module_id && moduleparcours.module_id != 0 && !empty moduleparcours.parcours_id && moduleparcours.parcours_id != 0)}">
+						<input type="submit"
+							value="<spring:message text="Add Module-Parcours"/>" />
+					</c:if>
+				</form:form>
+				<br>
+			</div>
+ 			<div class="col-md-6">
+				<h3>Module-Prerequis List</h3>
+				<c:if test="${!empty listModulePrerequis}">
+					<table class="tg">
+						<tr>
+							<th width="0">Module_id</th>
+							<th width="80">Prerequis_id</th>
+						</tr>
+						<c:forEach items="${listModulePrerequis}" var="moduleprerequis">
+							<tr>
+								<td>${moduleprerequis.module_id}</td>
+								<td>${moduleprerequis.prerequis_id}</td>
+								<td>
+									<a
+									href="<c:url value='/admin/moduleprerequis/remove/${moduleprerequis.module_id}/prerequis_id/${moduleprerequis.prerequis_id}' />">Delete</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:url var="addModulePrerequis" value="/admin/moduleprerequis/add"></c:url>
+				<form:form action="${addModulePrerequis}" commandName="moduleprerequis">
+					<form:label path="module_id">
+						<spring:message text="module_id" />
+					</form:label>
+					<form:input path="module_id" />
+					<form:label path="prerequis_id">
+						<spring:message text="prerequis_id" />
+					</form:label>
+					<form:input path="prerequis_id" />
+					<c:if
+						test="${!(!empty moduleprerequis.module_id && moduleprerequis.module_id != 0 && !empty moduleprerequis.prerequis_id && moduleprerequis.prerequis_id != 0)}">
+						<input type="submit"
+							value="<spring:message text="Add Module-Prerequis"/>" />
+					</c:if>
+				</form:form>
+				<br>
+			</div>
 		</div>
 		<div class="row align-items-end">
 		<div class="col-md-6">
@@ -182,6 +264,60 @@
 					</c:if>
 					<c:if test="${empty parcours.name}">
 						<input type="submit" value="<spring:message text="Add Parcours"/>" />
+					</c:if>
+				</form:form>
+				<br>
+			</div>
+			<div class="col-md-6">
+				<h3>Prerequis List</h3>
+				<c:if test="${!empty listPrerequis}">
+					<table class="tg">
+						<tr>
+							<th width="0">ID</th>
+							<th width="80">Prerequis Name</th>
+
+						</tr>
+						<c:forEach items="${listPrerequis}" var="prerequis">
+							<tr>
+								<td>${prerequis.id}</td>
+								<td>${prerequis.name}</td>
+								<td>${prerequis.eval}</td>
+								<td>${prerequis.requis}</td>
+								<td><a
+									href="<c:url value='/admin/prerequis/edit/${prerequis.id}' />">Edit</a>
+									<a
+									href="<c:url value='/admin/prerequis/remove/${prerequis.id}' />">Delete</a></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:url var="addPrerequis" value="/admin/prerequis/add"></c:url>
+				<form:form action="${addPrerequis}" commandName="prerequis">
+					<c:if test="${!empty prerequis.name}">
+						<form:label path="id">
+							<spring:message text="ID" />
+						</form:label>
+						<form:input path="id" readonly="true" size="8" disabled="true" />
+						<form:hidden path="id" />
+					</c:if>
+					<form:label path="name">
+						<spring:message text="Name" />
+					</form:label>
+					<form:input path="name" />
+					<form:label path="eval">
+						<spring:message text="Evaluation type" />
+					</form:label>
+					<form:input path="eval" />
+					<form:label path="requis">
+						<spring:message text="Note" />
+					</form:label>
+					<form:input path="requis" />
+					<c:if test="${!empty prerequis.name}">
+						<input type="submit"
+							value="<spring:message text="Edit Prerequis"/>" />
+					</c:if>
+					<c:if test="${empty prerequis.name}">
+						<input type="submit" value="<spring:message text="Add Prerequis"/>" />
 					</c:if>
 				</form:form>
 				<br>

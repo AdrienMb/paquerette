@@ -17,10 +17,16 @@ import com.paquerette.myapp.model.Job;
 import com.paquerette.myapp.model.JobDomaine;
 import com.paquerette.myapp.model.JobParcours;
 import com.paquerette.myapp.model.Module;
+import com.paquerette.myapp.model.ModuleParcours;
+import com.paquerette.myapp.model.ModulePrerequis;
 import com.paquerette.myapp.model.Parcours;
+import com.paquerette.myapp.model.Prerequis;
 import com.paquerette.myapp.service.JobService;
+import com.paquerette.myapp.service.ModuleParcoursService;
+import com.paquerette.myapp.service.ModulePrerequisService;
 import com.paquerette.myapp.service.ModuleService;
 import com.paquerette.myapp.service.ParcoursService;
+import com.paquerette.myapp.service.PrerequisService;
 import com.paquerette.myapp.service.DomaineService;
 import com.paquerette.myapp.service.JobDomaineService;
 import com.paquerette.myapp.service.JobParcoursService;
@@ -34,6 +40,9 @@ public class AdminController {
     private ParcoursService parcoursService;
     private JobDomaineService jobDomaineService;
     private ModuleService moduleService;
+    private ModuleParcoursService moduleParcoursService;
+    private ModulePrerequisService modulePrerequisService;
+    private PrerequisService prerequisService;
 
     @Autowired(required = true)
     @Qualifier(value = "jobService")
@@ -42,9 +51,27 @@ public class AdminController {
     }
     
     @Autowired(required = true)
+    @Qualifier(value = "prerequisService")
+    public void setPrerequisService(PrerequisService ps) {
+        this.prerequisService = ps;
+    }
+    
+    @Autowired(required = true)
     @Qualifier(value = "moduleService")
     public void setModuleService(ModuleService ms) {
         this.moduleService = ms;
+    }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "moduleParcoursService")
+    public void setModuleParcoursService(ModuleParcoursService mps) {
+        this.moduleParcoursService= mps;
+    }
+    
+    @Autowired(required = true)
+    @Qualifier(value = "modulePrerequisService")
+    public void setModulePrerequisService(ModulePrerequisService mps) {
+        this.modulePrerequisService = mps;
     }
     
     @Autowired(required = true)
@@ -85,6 +112,12 @@ public class AdminController {
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
         model.addAttribute("module", new Module());
         model.addAttribute("listModules", this.moduleService.listModules());
+        model.addAttribute("moduleparcours", new ModuleParcours());
+        model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
+        model.addAttribute("moduleprerequis", new ModulePrerequis());
+        model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
+        model.addAttribute("prerequis", new Prerequis());
+        model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
         return "admin";
     }
 
@@ -147,6 +180,12 @@ public class AdminController {
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
         model.addAttribute("module", new Module());
         model.addAttribute("listModules", this.moduleService.listModules());
+        model.addAttribute("moduleparcours", new ModuleParcours());
+        model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
+        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
+        model.addAttribute("prerequis", new Prerequis());
+        model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
         return "admin";
     }
     
@@ -176,6 +215,12 @@ public class AdminController {
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
         model.addAttribute("module", new Module());
         model.addAttribute("listModules", this.moduleService.listModules());
+        model.addAttribute("moduleparcours", new ModuleParcours());
+        model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
+        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
+        model.addAttribute("prerequis", new Prerequis());
+        model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
         return "admin";
     }
     
@@ -215,6 +260,12 @@ public class AdminController {
         model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
         model.addAttribute("module", new Module());
         model.addAttribute("listModules", this.moduleService.listModules());
+        model.addAttribute("moduleparcours", new ModuleParcours());
+        model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
+        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
+        model.addAttribute("prerequis", new Prerequis());
+        model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
         return "admin";
     }
     
@@ -254,6 +305,12 @@ public class AdminController {
         model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
         model.addAttribute("module", this.moduleService.getModuleById(id));
         model.addAttribute("listModules", this.moduleService.listModules());
+        model.addAttribute("moduleparcours", new ModuleParcours());
+        model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
+        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
+        model.addAttribute("prerequis", new Prerequis());
+        model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
         return "admin";
     }
     
@@ -268,6 +325,77 @@ public class AdminController {
     	this.jobDomaineService.addJobDomaine(p);
         return "redirect:/admin";
 
+    }
+    
+    @RequestMapping(value = "/admin/moduleparcours/remove/{module_id}/parcours_id/{parcours_id}", method = RequestMethod.GET)
+    public String removeModuleParcours(@PathVariable("module_id") int module_id, @PathVariable("parcours_id") int parcours_id) {
+    	this.moduleParcoursService.removeModuleParcours(module_id, parcours_id);
+        return "redirect:/admin";
+    }
+    
+    @RequestMapping(value = "admin/moduleparcours/add", method = RequestMethod.POST)
+    public String addModuleParcours(@ModelAttribute("moduleparcours") ModuleParcours mp) {
+    	this.moduleParcoursService.addModuleParcours(mp);
+        return "redirect:/admin";
+
+    }
+    
+    @RequestMapping(value = "/admin/moduleprerequis/remove/{module_id}/prerequis_id/{prerequis_id}", method = RequestMethod.GET)
+    public String removeModulePrerequis(@PathVariable("module_id") int module_id, @PathVariable("prerequis_id") int prerequis_id) {
+    	this.modulePrerequisService.removeModulePrerequis(module_id, prerequis_id);
+        return "redirect:/admin";
+    }
+    
+    @RequestMapping(value = "admin/moduleprerequis/add", method = RequestMethod.POST)
+    public String addModulePrerequis(@ModelAttribute("moduleprerequis") ModulePrerequis mp) {
+    	this.modulePrerequisService.addModulePrerequis(mp);
+        return "redirect:/admin";
+
+    }
+    
+    // For add and update prerequis both
+    @RequestMapping(value = "admin/prerequis/add", method = RequestMethod.POST)
+    public String addPrerequis(@ModelAttribute("module") Prerequis m) {
+
+        if (m.getId() == 0) {
+            // new Job, add it
+            this.prerequisService.addPrerequis(m);
+        } else {
+            // existing Job, call update
+            this.prerequisService.updatePrerequis(m);
+        }
+
+        return "redirect:/admin";
+
+    }
+
+    @RequestMapping("admin/prerequis/remove/{id}")
+    public String removePrerequis(@PathVariable("id") int id) {
+        this.prerequisService.removePrerequis(id);
+        return "redirect:/admin";
+    }
+
+    @RequestMapping("admin/prerequis/edit/{id}")
+    public String editPrerequis(@PathVariable("id") int id, Model model) {
+    	model.addAttribute("domaine", new Domaine());
+        model.addAttribute("jobdomaine", new JobDomaine());
+        model.addAttribute("listDomaines", this.domaineService.listDomaines());
+        model.addAttribute("job", new Job());
+        model.addAttribute("listJobs", this.jobService.listJobs());
+        model.addAttribute("jobparcours", new JobParcours());
+        model.addAttribute("parcours", new Parcours());
+        model.addAttribute("listParcours", this.parcoursService.listParcours());
+        model.addAttribute("listJobParcours", this.jobParcoursService.listJobParcours());
+        model.addAttribute("listJobDomaines", this.jobDomaineService.listJobDomaine());
+        model.addAttribute("module", new Module());
+        model.addAttribute("listModules", this.moduleService.listModules());
+        model.addAttribute("moduleparcours", new ModuleParcours());
+        model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
+        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
+        model.addAttribute("prerequis", this.prerequisService.getPrerequisById(id));
+        model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+        return "admin";
     }
 
 }
