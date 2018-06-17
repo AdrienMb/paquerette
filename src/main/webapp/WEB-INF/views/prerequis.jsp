@@ -12,15 +12,17 @@
 <title>Note Page</title>
 </head>
 <body>
-<div class="container">
+<div class="container  main">
 <div class="row">
- <div class="col-md-3">
+<div class="col-md-4">
+				<div class="blue-container">
 <h3>Choisissez votre parcours selon vos compétences</h3><br>
  <p>Selectionnez votre niveau dans les différents secteur</p>
  </div>
+ </div>
  <div class="col-md-1">
  </div>
-  <div class="col-md-8">
+  <div class="col-md-7">
 <form:form action="/prerequis/findParcoursByprerequis"
 			method="POST" modelAttribute="prerequis">	
 <c:forEach items="${listPrerequis}" varStatus="i" var = "prerequis">
@@ -29,7 +31,7 @@
         <form:input type="hidden" class="prerequis" name="${prerequis.id}" value="${prerequis.id}"  path ="id" /> <br>
         
 </c:forEach> 
-<button type= "submit">submit</button>
+<input type= "submit" value="Chercher mon parcours">
 </form:form>
 </div>
 </div>
