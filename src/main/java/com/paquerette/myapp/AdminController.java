@@ -182,7 +182,7 @@ public class AdminController {
         model.addAttribute("listModules", this.moduleService.listModules());
         model.addAttribute("moduleparcours", new ModuleParcours());
         model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
-        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("moduleprerequis", new ModulePrerequis());
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
@@ -217,7 +217,7 @@ public class AdminController {
         model.addAttribute("listModules", this.moduleService.listModules());
         model.addAttribute("moduleparcours", new ModuleParcours());
         model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
-        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("moduleprerequis", new ModulePrerequis());
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
@@ -262,7 +262,7 @@ public class AdminController {
         model.addAttribute("listModules", this.moduleService.listModules());
         model.addAttribute("moduleparcours", new ModuleParcours());
         model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
-        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("moduleprerequis", new ModulePrerequis());
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
@@ -307,7 +307,7 @@ public class AdminController {
         model.addAttribute("listModules", this.moduleService.listModules());
         model.addAttribute("moduleparcours", new ModuleParcours());
         model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
-        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("moduleprerequis", new ModulePrerequis());
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
@@ -391,7 +391,7 @@ public class AdminController {
         model.addAttribute("listModules", this.moduleService.listModules());
         model.addAttribute("moduleparcours", new ModuleParcours());
         model.addAttribute("listModuleParcours", this.moduleParcoursService.listModuleParcours());
-        model.addAttribute("modulePrerequis", new ModulePrerequis());
+        model.addAttribute("moduleprerequis", new ModulePrerequis());
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", this.prerequisService.getPrerequisById(id));
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
