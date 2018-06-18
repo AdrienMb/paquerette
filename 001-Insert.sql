@@ -6,6 +6,7 @@ TRUNCATE TABLE job_parcours RESTART IDENTITY CASCADE;
 TRUNCATE TABLE job_domaine RESTART IDENTITY CASCADE;
 TRUNCATE TABLE module_parcours RESTART IDENTITY CASCADE;
 TRUNCATE TABLE module_prerequis RESTART IDENTITY CASCADE;
+TRUNCATE TABLE userdetail RESTART IDENTITY CASCADE;
 
 INSERT INTO job (job_name) VALUES ('Administrateur de base de données');
 INSERT INTO job (job_name) VALUES ('Administrateur de réseau');
