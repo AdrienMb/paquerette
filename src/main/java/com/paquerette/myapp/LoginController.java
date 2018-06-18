@@ -3,7 +3,11 @@ package com.paquerette.myapp;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,26 +19,34 @@ import com.paquerette.myapp.service.UserService;
 @Controller
 public class LoginController {
 	
-	@Autowired
 	private UserService UserService;
+	
+	@Autowired(required = true)
+	@Qualifier(value = "userService")
+	public void setModuleService(UserService us) {
+		this.UserService = us;
+	}
 	
 	@RequestMapping(value="/")
     public ModelAndView mainPage() {
-        return new ModelAndView("login");
+		ModelAndView model = new ModelAndView("login");
+		model.addObject("user",new User());
+        return model;
     }
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login")
 	public String showLoginInForm() {
         return "login";
     }
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String verifyLogin(@RequestParam String userId,@RequestParam String password) {
-        User user = UserService.loginUser(userId,password);
-        if ( user == null ) {
+	public String verifyLogin(@ModelAttribute("user")User user, BindingResult result,  ModelMap model) {
+		System.out.println(user);
+        User usercheck = UserService.loginUser((user.getName()),user.getPassword());
+        if ( usercheck == null ) {
         	return "login";
         }
-        return "redirect:/home";
+        return "home";
 	}
 	
 	

@@ -20,16 +20,17 @@ public class UserServiceImpl implements UserService {
 	
     @Override
     @Transactional
-    public User getUserByName(String userId) {
-        return this.userDAO.getUserByName(userId);
+    public User getUserByName(String name) {
+        return this.userDAO.getUserByName(name);
     }
     
-    public User loginUser(String userId, String password) {
-    	User user = this.getUserByName(userId);
+    public User loginUser(String name, String password) {
+    	User user = this.getUserByName(name);
+    	System.out.println(user.getPassword()+user.getName()+user.getId());
     	if (user != null && user.getPassword().equals(password)) {
     		return user;
     	}
     	return null;
     }
-}
-    
+
+ }

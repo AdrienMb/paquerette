@@ -44,14 +44,13 @@ CONSTRAINT fk_module FOREIGN KEY (module_id) REFERENCES module (module_id),
 CONSTRAINT fk_parcours FOREIGN KEY (parcours_id) REFERENCES parcours (parcours_id)
 );
 
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE IF NOT EXISTS userdetail (
 user_id SERIAL PRIMARY KEY NOT NULL,
 user_name char(30) NULL,
-user_password varchar(30) NULL,
+user_password varchar(30) NULL
 );
 
-INSERT INTO "user" (user_name) VALUES ('dylan');
-INSERT INTO "user" (user_password) VALUES ('1234');
+INSERT INTO userdetail (user_name,user_password) VALUES ('dylan','1234');
 
 INSERT INTO job (job_name) VALUES ('dev');
 INSERT INTO job (job_name) VALUES ('devops');

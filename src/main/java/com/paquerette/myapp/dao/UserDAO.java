@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.paquerette.myapp.model.User;
 
 public interface UserDAO {
-
-	public User getUserByName(String userId);
-
+	
+	public User getUserByName(String name);
+	
 }

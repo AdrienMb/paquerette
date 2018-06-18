@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * Entity bean with JPA annotations Hibernate provides JPA implementation
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "USERDETAIL")
 public class User {
 
 	@Id
@@ -40,15 +40,15 @@ public class User {
 		public void setId(int id) {
 			this.id = id;
 		}
-
-		public String getUserId() {
+		
+		public String getName() {
 			return name;
 		}
 		
 		public void setName(String name) {
 			this.name = name;
 		}
-
+		
 		public String getPassword() {
 			return password;
 		}
