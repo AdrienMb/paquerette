@@ -45,14 +45,8 @@
                 <beans:value>com.paquerette.myapp.model.Domaine</beans:value>
                 <beans:value>com.paquerette.myapp.model.Prerequis</beans:value>
                 <beans:value>com.paquerette.myapp.model.Module</beans:value>
-<<<<<<< HEAD
-                <beans:value>com.paquerette.myapp.model.JobParcours</beans:value>
-                <beans:value>com.paquerette.myapp.model.JobDomaine</beans:value>
-                <beans:value>com.paquerette.myapp.model.ModuleParcours</beans:value>
-                <beans:value>com.paquerette.myapp.model.ModulePrerequis</beans:value>
-=======
-                <beans:value>com.paquerette.myapp.model.User</beans:value>
->>>>>>> dylan
+			    <beans:value>com.paquerette.myapp.model.User</beans:value>
+
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -76,10 +70,10 @@
     <beans:bean id="moduleDAO" class="com.paquerette.myapp.dao.ModuleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </beans:bean>
-<<<<<<< HEAD
     <beans:bean id="prerequisDAO" class="com.paquerette.myapp.dao.PrerequisDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </beans:bean>
+    
     <beans:bean class="com.paquerette.myapp.dao.JobParcoursDAOImpl" id="jobParcoursDAO">
 		<beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory"/>
 	</beans:bean>
@@ -93,14 +87,12 @@
 		<beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory"/>
 	</beans:bean>
 	
-
-=======
     <beans:bean id="userDAO" class="com.paquerette.myapp.dao.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </beans:bean>
     
     
->>>>>>> dylan
+
     <beans:bean id="jobService" class="com.paquerette.myapp.service.JobServiceImpl">
         <beans:property name="jobDAO" ref="jobDAO"></beans:property>
     </beans:bean>
@@ -113,7 +105,7 @@
     <beans:bean id="moduleService" class="com.paquerette.myapp.service.ModuleServiceImpl">
         <beans:property name="moduleDAO" ref="moduleDAO"></beans:property>
     </beans:bean>
-<<<<<<< HEAD
+
     <beans:bean id="prerequisService" class="com.paquerette.myapp.service.PrerequisServiceImpl">
         <beans:property name="prerequisDAO" ref="prerequisDAO"></beans:property>
     </beans:bean>
@@ -129,14 +121,11 @@
 	<beans:bean class="com.paquerette.myapp.service.ModuleParcoursServiceImpl" id="moduleParcoursService">
 		<beans:property name="moduleParcoursDAO" ref="moduleParcoursDAO"/>
 	</beans:bean>
-=======
+	
     <beans:bean id="userService" class="com.paquerette.myapp.service.UserServiceImpl">
         <beans:property name="userDAO" ref="userDAO"></beans:property>
     </beans:bean>
     
->>>>>>> dylan
-    
-
     
     <context:component-scan base-package="com.paquerette.myapp" />
 
