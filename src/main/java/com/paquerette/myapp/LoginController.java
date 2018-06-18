@@ -55,5 +55,10 @@ public class LoginController {
         return "home";
 	}
 	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request) {
+		request.getSession().setAttribute("user", null);
+		return "redirect:/login";
+	}
 	
 }

@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+<%-- <%@ page session="true" %> --%>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Parcours Isep</title>
@@ -23,6 +24,9 @@
       <li><a href="${pageContext.request.contextPath}/prerequis">Avec notes</a></li>
       <c:if test="${isAdmin}">
       <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
+      </c:if>
+      <c:if test="${sessionScope.user != null}">
+      <li><a href="${pageContext.request.contextPath}/logout">Deconnexion</a></li>
       </c:if>
     </ul>
   </div>
