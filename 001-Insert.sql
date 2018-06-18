@@ -139,5 +139,5 @@ INSERT INTO module_parcours (module_id, parcours_id) VALUES ('2', '2');
 INSERT INTO module_prerequis (module_id,prerequis_id) VALUES ('1','1');
 INSERT INTO module_prerequis (module_id,prerequis_id) VALUES ('1','2');
 
-INSERT INTO userdetail (user_name,user_password) VALUES ('dylan','1234');
-INSERT INTO userdetail (user_name,user_password) VALUES ('william','abcd');
+INSERT INTO userdetail (user_name,user_password,user_role) VALUES ('dylan','1234','student');
+INSERT INTO userdetail (user_name,user_password,user_role) VALUES ('william','abcd','admin');

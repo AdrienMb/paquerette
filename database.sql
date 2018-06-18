@@ -54,7 +54,8 @@ requis INT NOT NULL
 CREATE TABLE IF NOT EXISTS userdetail (
 user_id SERIAL PRIMARY KEY NOT NULL,
 user_name char(30) NULL,
-user_password varchar(30) NULL
+user_password varchar(30) NULL,
+user_role varchar(30) NULL
 );
 
 CREATE TABLE IF NOT EXISTS module_prerequis (

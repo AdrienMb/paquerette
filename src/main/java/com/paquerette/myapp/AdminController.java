@@ -2,6 +2,8 @@ package com.paquerette.myapp;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,14 @@ import com.paquerette.myapp.model.ModuleParcours;
 import com.paquerette.myapp.model.ModulePrerequis;
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.model.Prerequis;
+import com.paquerette.myapp.model.User;
 import com.paquerette.myapp.service.JobService;
 import com.paquerette.myapp.service.ModuleParcoursService;
 import com.paquerette.myapp.service.ModulePrerequisService;
 import com.paquerette.myapp.service.ModuleService;
 import com.paquerette.myapp.service.ParcoursService;
 import com.paquerette.myapp.service.PrerequisService;
+import com.paquerette.myapp.service.UserServiceImpl;
 import com.paquerette.myapp.service.DomaineService;
 import com.paquerette.myapp.service.JobDomaineService;
 import com.paquerette.myapp.service.JobParcoursService;
@@ -99,7 +103,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String listJobs(Model model) {
+    public String listJobs(Model model, HttpServletRequest request) {
         model.addAttribute("job", new Job());
         model.addAttribute("jobparcours", new JobParcours());
         model.addAttribute("parcours", new Parcours());
@@ -118,7 +122,14 @@ public class AdminController {
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
-        return "admin";
+        User user = (User) request.getSession().getAttribute("user");
+        if (UserServiceImpl.isAdmin(user)) {
+        	model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));	
+        	return "admin";
+        }
+        else {
+        	return "redirect:/";
+        }
     }
 
     // For add and update Job both
@@ -167,7 +178,7 @@ public class AdminController {
     }
 
     @RequestMapping("admin/parcours/edit/{id}")
-    public String editParcours(@PathVariable("id") int id, Model model) {
+    public String editParcours(@PathVariable("id") int id, Model model,HttpServletRequest request) {
         model.addAttribute("parcours", this.parcoursService.getParcoursById(id));
         model.addAttribute("listParcours", this.parcoursService.listParcours());
         model.addAttribute("job", new Job());
@@ -186,6 +197,7 @@ public class AdminController {
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+        model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "admin";
     }
     
@@ -202,7 +214,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/jobs/edit/{id}", method = RequestMethod.GET)
-    public String editJob(@PathVariable("id") int id, Model model) {
+    public String editJob(@PathVariable("id") int id, Model model,HttpServletRequest request) {
         model.addAttribute("job", this.jobService.getJobById(id));
         model.addAttribute("listJobs", this.jobService.listJobs());
         model.addAttribute("jobparcours", new JobParcours());
@@ -221,6 +233,7 @@ public class AdminController {
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+        model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "admin";
     }
     
@@ -247,7 +260,7 @@ public class AdminController {
     }
 
     @RequestMapping("admin/domaines/edit/{id}")
-    public String editDomaine(@PathVariable("id") int id, Model model) {
+    public String editDomaine(@PathVariable("id") int id, Model model,HttpServletRequest request) {
         model.addAttribute("domaine", this.domaineService.getDomaineById(id));
         model.addAttribute("jobdomaine", new JobDomaine());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
@@ -266,6 +279,7 @@ public class AdminController {
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+        model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "admin";
     }
     
@@ -292,7 +306,7 @@ public class AdminController {
     }
 
     @RequestMapping("admin/modules/edit/{id}")
-    public String editModule(@PathVariable("id") int id, Model model) {
+    public String editModule(@PathVariable("id") int id, Model model,HttpServletRequest request) {
     	model.addAttribute("domaine", new Domaine());
         model.addAttribute("jobdomaine", new JobDomaine());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
@@ -311,6 +325,7 @@ public class AdminController {
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", new Prerequis());
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+        model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "admin";
     }
     
@@ -376,7 +391,7 @@ public class AdminController {
     }
 
     @RequestMapping("admin/prerequis/edit/{id}")
-    public String editPrerequis(@PathVariable("id") int id, Model model) {
+    public String editPrerequis(@PathVariable("id") int id, Model model,HttpServletRequest request) {
     	model.addAttribute("domaine", new Domaine());
         model.addAttribute("jobdomaine", new JobDomaine());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
@@ -395,6 +410,7 @@ public class AdminController {
         model.addAttribute("listModulePrerequis", this.modulePrerequisService.listModulePrerequis());
         model.addAttribute("prerequis", this.prerequisService.getPrerequisById(id));
         model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+        model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "admin";
     }
 

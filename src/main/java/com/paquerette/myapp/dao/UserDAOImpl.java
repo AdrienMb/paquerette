@@ -30,25 +30,14 @@ public class UserDAOImpl implements UserDAO {
 	    }
 	 
      @SuppressWarnings("unchecked")
-//     	public List<User> listUser(){
-//    	 	Session session = this.sessionFactory.getCurrentSession();
-//    	 	List<User> UserList = session.createQuery("from user").list();
-//    	 	for (User u : UserList) {
-//    	        logger.info("User List::" + u);
-//    	    }
-//    	    return UserList;
-//     }
-	 
-     @Override
+	 @Override
      @Transactional
      public User getUserByName(String name) {
     			List<User> users = new ArrayList<User>();
-
     			        users = sessionFactory.getCurrentSession()
     			            .createQuery("from User where name=?")
     			            .setParameter(0,name)
     			            .list();
-
     			        if (users.size() > 0) {
     			            return users.get(0);
     			        } else {

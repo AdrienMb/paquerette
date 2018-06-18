@@ -31,6 +31,8 @@ public class User {
 	private String name;
 	@Column(name = "user_password")
 	private String password;
+	@Column(name = "user_role")
+	private String role;
 	
 	
 	 public int getId() {
@@ -55,5 +57,13 @@ public class User {
 
 		public void setPassword(String password) {
 			this.password = password;
+		}
+		
+		public String getRole() {
+			return role;
+		}
+
+		public void setRole(String role) {
+			this.role = role;
 		}
 }

@@ -18,8 +18,6 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="${pageContext.request.contextPath}/jobs">Par métier</a></li>
-      <li><a href="${pageContext.request.contextPath}/modules">Par module</a></li>
-      <li><a href="#">Avec notes</a></li>
     </ul>
   </div>
   </nav>

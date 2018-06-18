@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.paquerette.myapp.model.Domaine;
 import com.paquerette.myapp.model.Job;
 import com.paquerette.myapp.model.Parcours;
+import com.paquerette.myapp.model.User;
 import com.paquerette.myapp.service.JobService;
+import com.paquerette.myapp.service.UserServiceImpl;
 import com.paquerette.myapp.service.DomaineService;
 
 @Controller
@@ -43,15 +47,16 @@ public class JobController {
     }
 
     @RequestMapping(value = "/jobs", method = RequestMethod.GET)
-    public String listJobs(Model model) {
+    public String listJobs(Model model,HttpServletRequest request) {
         model.addAttribute("job", new Job());
         model.addAttribute("listDomaines", this.domaineService.listDomaines());
         model.addAttribute("listJobs", this.jobService.listJobs());
+        model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "job";
     }
     
     @RequestMapping(value = "/job/findParcoursByJobId", method = RequestMethod.POST)
-    public String findParcoursByJobId(@RequestParam("jobsId") List<Integer> j, Model model) {
+    public String findParcoursByJobId(@RequestParam("jobsId") List<Integer> j, Model model,HttpServletRequest request) {
 		Map<Parcours,Integer> hm = new HashMap<Parcours,Integer>();
 		Map<Parcours, String> parcours_jobs = new HashMap<Parcours, String>();
 		Map<Parcours, Set<String>> parcours_jobnamelist = new HashMap<Parcours, Set<String>>();
@@ -81,6 +86,7 @@ public class JobController {
 		}
 		model.addAttribute("parcoursJobs", parcours_jobs);
 		model.addAttribute("listParcours", hm);
+		model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
 		return "parcours";
     }
 

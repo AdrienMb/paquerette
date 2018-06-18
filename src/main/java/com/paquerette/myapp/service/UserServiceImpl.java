@@ -26,11 +26,15 @@ public class UserServiceImpl implements UserService {
     
     public User loginUser(String name, String password) {
     	User user = this.getUserByName(name);
-    	System.out.println(user.getPassword()+user.getName()+user.getId());
     	if (user != null && user.getPassword().equals(password)) {
     		return user;
     	}
     	return null;
     }
 
+    public static boolean isAdmin(User user) {
+    	if (user==null) return false;
+    	if (user.getRole()==null) return false;
+    	return user.getRole().equals("admin");
+    } 	
  }

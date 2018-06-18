@@ -21,7 +21,9 @@
       <li><a href="${pageContext.request.contextPath}/jobs">Par métier</a></li>
       <li><a href="${pageContext.request.contextPath}/modules">Par module</a></li>
       <li><a href="${pageContext.request.contextPath}/prerequis">Avec notes</a></li>
+      <c:if test="${isAdmin}">
       <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
+      </c:if>
     </ul>
   </div>
   </nav>

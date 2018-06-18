@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,9 @@ import com.paquerette.myapp.model.Job;
 import com.paquerette.myapp.model.Module;
 import com.paquerette.myapp.model.Parcours;
 import com.paquerette.myapp.model.Prerequis;
+import com.paquerette.myapp.model.User;
 import com.paquerette.myapp.service.PrerequisService;
+import com.paquerette.myapp.service.UserServiceImpl;
 import com.paquerette.myapp.service.DomaineService;
 import com.paquerette.myapp.service.ModuleService;
 import com.paquerette.myapp.service.ParcoursService;
@@ -53,14 +57,16 @@ public class PrerequisController {
 		this.parcoursService = ps;
 	}
 	@RequestMapping(value = "/prerequis", method = RequestMethod.GET)
-	public String getAllPrequis(Model model) {
+	public String getAllPrequis(Model model, HttpServletRequest request) {
+	if (request.getSession().getAttribute("user")==null) return "redirect:/login";
 	model.addAttribute("prerequis", new Prerequis());
    	model.addAttribute("listPrerequis", this.prerequisService.listPrerequis());
+   	model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "prerequis";
     }
 	@RequestMapping(value = "/prerequis/findParcoursByprerequis", method = RequestMethod.POST)
-	public String findParcoursByprerequis(@RequestParam("id") List<Integer> ids,@RequestParam("requis") List<Integer> r ,Model model) {
-		
+	public String findParcoursByprerequis(@RequestParam("id") List<Integer> ids,@RequestParam("requis") List<Integer> r ,Model model,HttpServletRequest request) {
+		if (request.getSession().getAttribute("user")==null) return "redirect:/login";
 		Map<Parcours,Integer> parcours_score = new HashMap<Parcours,Integer>();
 		List<Parcours> parcours = parcoursService.listParcours();
 		Map<Parcours, Map<Prerequis, String>> parcours_notes = new HashMap<Parcours, Map<Prerequis, String>>();
@@ -107,6 +113,7 @@ public class PrerequisController {
 		
 		model.addAttribute("listParcours", parcours_score);
 		model.addAttribute("parcoursNotes", parcours_notes);
+		model.addAttribute("isAdmin", UserServiceImpl.isAdmin((User) request.getSession().getAttribute("user")));
         return "parcours";
     }
 	
