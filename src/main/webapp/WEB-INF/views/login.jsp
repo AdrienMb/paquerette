@@ -9,10 +9,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="/myapp/resources/style.css">
-	<link rel="icon" href="/myapp/resources/favicon.ico" />
 </head>
 <body>
-<nav class="navbar">
+<nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="#"><img class="logo" src="/myapp/resources/logo.png"/></a>
@@ -20,12 +19,24 @@
     <ul class="nav navbar-nav">
       <li><a href="${pageContext.request.contextPath}/jobs">Par métier</a></li>
       <li><a href="${pageContext.request.contextPath}/modules">Par module</a></li>
-      <li><a href="${pageContext.request.contextPath}/prerequis">Avec notes</a></li>
-      <li><a href="${pageContext.request.contextPath}/admin">Admin</a></li>
+      <li><a href="#">Avec notes</a></li>
     </ul>
   </div>
   </nav>
   
+  <div>
+    <form:form name="f" action="/login" method="post" modelAttribute="user">               
+      <fieldset>
+        <label for="username">Identifiant</label>
+        <form:input type="text" id="username" path="name"/> <br>      
+        <label for="password">Mot de passe</label>
+        <form:input type="password" id="password" path="password"/>  <br>  
+        <div class="form-actions">
+          <button type="submit" class="btn">Log in</button>
+        </div>
+      </fieldset>
+       </form:form>
+  </div>
+<%@include  file="footer.html" %>
 </body>
 </html>
-

@@ -51,6 +51,15 @@ typeEvaluation text NOT NULL,
 requis INT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS userdetail (
+user_id SERIAL PRIMARY KEY NOT NULL,
+user_name char(30) NULL,
+user_password varchar(30) NULL
+);
+
+INSERT INTO userdetail (user_name,user_password) VALUES ('dylan','1234');
+
+
 CREATE TABLE IF NOT EXISTS module_prerequis (
 module_id INT NOT NULL,
 prerequis_id INT NOT NULL,
