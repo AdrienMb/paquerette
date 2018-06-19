@@ -37,7 +37,7 @@ public class PrerequisController {
     private ParcoursService parcoursService;
     
     private final String GOOD_GRADE = "green";
-    private final String MEDIUM_GRADE = "yellow";
+    private final String MEDIUM_GRADE = "orange";
     private final String BAD_GRADE = "red";
     private final String NA_GRADE = "blue";
 
