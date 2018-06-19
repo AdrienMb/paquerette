@@ -16,7 +16,7 @@
 				<div class="items-container">
 					<h3>Jobs List</h3>
 					<c:if test="${!empty listJobs}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">ID</th>
 								<th width="80">Job Name</th>
@@ -59,7 +59,7 @@
 				<div class="items-container">
 					<h3>Jobs-Domaines List</h3>
 					<c:if test="${!empty listJobDomaines}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">Job_id</th>
 								<th width="80">Domaine_id</th>
@@ -104,7 +104,7 @@
 				<div class="items-container">
 					<h3>Jobs-Parcours List</h3>
 					<c:if test="${!empty listJobParcours}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">Job_id</th>
 								<th width="80">Parcours_id</th>
@@ -150,7 +150,7 @@
 				<div class="items-container">
 					<h3>Module-Parcours List</h3>
 					<c:if test="${!empty listModuleParcours}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">Module_id</th>
 								<th width="80">Parcours_id</th>
@@ -197,7 +197,7 @@
 				<div class="items-container">
 					<h3>Module-Prerequis List</h3>
 					<c:if test="${!empty listModulePrerequis}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">Module_id</th>
 								<th width="80">Prerequis_id</th>
@@ -233,60 +233,11 @@
 					<br>
 				</div>
 			</div>
-		</div>
-		<div class="row align-items-end">
-			<div class="col-md-6">
-				<div class="items-container">
-					<h3>Parcours List</h3>
-					<c:if test="${!empty listParcours}">
-						<table class="tg">
-							<tr>
-								<th width="0">ID</th>
-								<th width="80">Parcours Name</th>
-
-							</tr>
-							<c:forEach items="${listParcours}" var="parcours">
-								<tr>
-									<td>${parcours.id}</td>
-									<td>${parcours.name}</td>
-									<td><a
-										href="<c:url value='/admin/parcours/edit/${parcours.id}' />">Edit</a>
-										<a
-										href="<c:url value='/admin/parcours/remove/${parcours.id}' />">Delete</a></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</c:if>
-					<c:url var="addParcours" value="/admin/parcours/add"></c:url>
-					<form:form action="${addParcours}" commandName="parcours">
-						<c:if test="${!empty parcours.name}">
-							<form:label path="id">
-								<spring:message text="ID" />
-							</form:label>
-							<form:input path="id" readonly="true" size="8" disabled="true" />
-							<form:hidden path="id" />
-						</c:if>
-						<form:label path="name">
-							<spring:message text="Name" />
-						</form:label>
-						<form:input path="name" />
-						<c:if test="${!empty parcours.name}">
-							<input type="submit"
-								value="<spring:message text="Edit Parcours"/>" />
-						</c:if>
-						<c:if test="${empty parcours.name}">
-							<input type="submit"
-								value="<spring:message text="Add Parcours"/>" />
-						</c:if>
-					</form:form>
-					<br>
-				</div>
-			</div>
 			<div class="col-md-6">
 				<div class="items-container">
 					<h3>Prerequis List</h3>
 					<c:if test="${!empty listPrerequis}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">ID</th>
 								<th width="80">Prerequis Name</th>
@@ -343,7 +294,7 @@
 				<div class="items-container">
 					<h3>Domaines List</h3>
 					<c:if test="${!empty listDomaines}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">ID</th>
 								<th width="80">Domaine Name</th>
@@ -385,11 +336,62 @@
 					<br>
 				</div>
 			</div>
+		</div>
+		<div class="row align-items-end">
+			<div class="col-md-6">
+				<div class="items-container">
+					<h3>Parcours List</h3>
+					<c:if test="${!empty listParcours}">
+						<table class="table">
+							<tr>
+								<th width="0">ID</th>
+								<th width="80">Parcours Name</th>
+
+							</tr>
+							<c:forEach items="${listParcours}" var="parcours">
+								<tr>
+									<td>${parcours.id}</td>
+									<td>${parcours.name}</td>
+									<td><a
+										href="<c:url value='/admin/parcours/edit/${parcours.id}' />">Edit</a>
+										<a
+										href="<c:url value='/admin/parcours/remove/${parcours.id}' />">Delete</a></td>
+								</tr>
+							</c:forEach>
+						</table>
+					</c:if>
+					<c:url var="addParcours" value="/admin/parcours/add"></c:url>
+					<form:form action="${addParcours}" commandName="parcours">
+						<c:if test="${!empty parcours.name}">
+							<form:label path="id">
+								<spring:message text="ID" />
+							</form:label>
+							<form:input path="id" readonly="true" size="8" disabled="true" />
+							<form:hidden path="id" />
+						</c:if>
+						<form:label path="name">
+							<spring:message text="Name" />
+						</form:label>
+						<form:input path="name" />
+						<c:if test="${!empty parcours.name}">
+							<input type="submit"
+								value="<spring:message text="Edit Parcours"/>" />
+						</c:if>
+						<c:if test="${empty parcours.name}">
+							<input type="submit"
+								value="<spring:message text="Add Parcours"/>" />
+						</c:if>
+					</form:form>
+					<br>
+				</div>
+			</div>
+
+
 			<div class="col-md-6">
 				<div class="items-container">
 					<h3>Modules List</h3>
 					<c:if test="${!empty listModules}">
-						<table class="tg">
+						<table class="table">
 							<tr>
 								<th width="0">ID</th>
 								<th width="80">Module Name</th>
