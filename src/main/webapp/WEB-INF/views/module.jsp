@@ -9,6 +9,7 @@
 <title>Module Page</title>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/myapp/resources/scripts/module.js"></script>
 </head>
 <body>
 	<div class="container  main">
@@ -17,22 +18,22 @@
 				<div class="blue-container">
 					<h3>Choisissez votre parcours par module</h3>
 					<br>
-					<p>Selectionnez des modules qui vous intéressent.</p>
+					<p>Sélectionnez des modules qui vous intéressent.</p>
 				</div>
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-7">
-				<h3>Modules List</h3>
+				<h3>Liste des Modules</h3>
 				<script type="text/javascript">
 					var module_domaines = new Map();
 				</script>
 				<c:if test="${!empty listModules}">
 					<form:form id="moduleForm" action="/module/findParcoursByModuleId"
-						method="POST" modelAttribute="module">
+						method="POST" modelAttribute="module" onsubmit="return validate()">
 						<c:forEach items="${listModules}" var="module">
 							<div class="checkbox-row">
 								<label class="checkbox-container"><form:checkbox
-										value="${module.id}" path="modulesId" />${module.name} <span
+										value="${module.id}" class="module" path="modulesId" />${module.name} <span
 									class="checkmark"></span>
 									</label>
 							</div>
